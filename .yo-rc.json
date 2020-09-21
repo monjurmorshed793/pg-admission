@@ -1,0 +1,40 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "aust.edu"
+    },
+    "jhipsterVersion": "6.10.3",
+    "applicationType": "monolith",
+    "baseName": "pgadmission",
+    "packageName": "aust.edu",
+    "packageFolder": "aust/edu",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "oracle",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": true,
+    "jwtSecretKey": "N2JjNmQyOTdkZGZhMDQ4MmI4MDA0OTkyMWFjYTRiNmMxNWI4MTM2MjUxOGQ4OGIzYzQ3OWRlMzZkN2QzOTIzNWI0YTI0MTE1YjcxOWZjODllMDI2MjAyNzkxYmYxNDQwNTczMzgxNGM0MzYyNDg4YjEzOTkwNGNmNjViZTQ3Y2Q=",
+    "embeddableLaunchScript": false,
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "angularX",
+    "clientTheme": "simplex",
+    "clientThemeVariant": "primary",
+    "creationTimestamp": 1600692364116,
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false,
+    "blueprints": []
+  }
+}
