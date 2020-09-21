@@ -48,6 +48,21 @@ public class CacheConfiguration {
             createCache(cm, aust.edu.domain.User.class.getName());
             createCache(cm, aust.edu.domain.Authority.class.getName());
             createCache(cm, aust.edu.domain.User.class.getName() + ".authorities");
+            createCache(cm, aust.edu.domain.Semester.class.getName());
+            createCache(cm, aust.edu.domain.Program.class.getName());
+            createCache(cm, aust.edu.domain.Division.class.getName());
+            createCache(cm, aust.edu.domain.District.class.getName());
+            createCache(cm, aust.edu.domain.Thana.class.getName());
+            createCache(cm, aust.edu.domain.ApplicationDeadline.class.getName());
+            createCache(cm, aust.edu.domain.Applicant.class.getName());
+            createCache(cm, aust.edu.domain.Applicant.class.getName() + ".applicantEducationalInformations");
+            createCache(cm, aust.edu.domain.Applicant.class.getName() + ".jobExperiences");
+            createCache(cm, aust.edu.domain.Applicant.class.getName() + ".applicantAddresses");
+            createCache(cm, aust.edu.domain.ApplicantPersonalInfo.class.getName());
+            createCache(cm, aust.edu.domain.ApplicantAddress.class.getName());
+            createCache(cm, aust.edu.domain.ExamType.class.getName());
+            createCache(cm, aust.edu.domain.ApplicantEducationalInformation.class.getName());
+            createCache(cm, aust.edu.domain.JobExperience.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

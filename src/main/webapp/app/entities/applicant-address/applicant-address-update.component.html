@@ -1,0 +1,88 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-applicant-address-heading">Create or edit a Applicant Address</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_applicationSerial">Application Serial</label>
+                    <input type="number" class="form-control" name="applicationSerial" id="field_applicationSerial"
+                           formControlName="applicationSerial"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_addressType">Address Type</label>
+                    <select class="form-control" name="addressType" formControlName="addressType" id="field_addressType">
+                        <option value="PRESENT">PRESENT</option>
+                        <option value="PERMANENT">PERMANENT</option>
+                    </select>
+                    <div *ngIf="editForm.get('addressType')!.invalid && (editForm.get('addressType')!.dirty || editForm.get('addressType')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('addressType')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_thanaOther">Thana Other</label>
+                    <input type="text" class="form-control" name="thanaOther" id="field_thanaOther"
+                           formControlName="thanaOther"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_line1">Line 1</label>
+                    <input type="text" class="form-control" name="line1" id="field_line1"
+                           formControlName="line1"/>
+                    <div *ngIf="editForm.get('line1')!.invalid && (editForm.get('line1')!.dirty || editForm.get('line1')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('line1')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('line1')?.errors?.maxlength">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_line2">Line 2</label>
+                    <input type="text" class="form-control" name="line2" id="field_line2"
+                           formControlName="line2"/>
+                    <div *ngIf="editForm.get('line2')!.invalid && (editForm.get('line2')!.dirty || editForm.get('line2')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('line2')?.errors?.maxlength">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_applicant">Applicant</label>
+                    <select class="form-control" id="field_applicant" name="applicant" formControlName="applicant">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="applicantOption.id === editForm.get('applicant')!.value?.id ? editForm.get('applicant')!.value : applicantOption" *ngFor="let applicantOption of applicants; trackBy: trackById">{{ applicantOption.applicationSerial }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

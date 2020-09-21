@@ -1,0 +1,59 @@
+{
+  "name": "ApplicantEducationalInformation",
+  "fields": [
+    {
+      "fieldName": "instituteName",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "board",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "totalMarksGrade",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "divisionClassGrade",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "passingYear",
+      "fieldType": "Integer",
+      "fieldValidateRules": [
+        "required"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "examType",
+      "otherEntityRelationshipName": "applicantEducationalInformation",
+      "relationshipValidateRules": "required",
+      "relationshipName": "examType",
+      "otherEntityField": "examTypeName"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "applicant",
+      "otherEntityRelationshipName": "applicantEducationalInformation",
+      "relationshipName": "applicant",
+      "otherEntityField": "applicationSerial"
+    }
+  ],
+  "changelogDate": "20200921130357",
+  "entityTableName": "edu_info",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

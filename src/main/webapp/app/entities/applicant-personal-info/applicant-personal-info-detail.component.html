@@ -1,0 +1,92 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="applicantPersonalInfo">
+            <h2><span>Applicant Personal Info</span> {{ applicantPersonalInfo.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Application Serial</span></dt>
+                <dd>
+                    <span>{{ applicantPersonalInfo.applicationSerial }}</span>
+                </dd>
+                <dt><span>Full Name</span></dt>
+                <dd>
+                    <span>{{ applicantPersonalInfo.fullName }}</span>
+                </dd>
+                <dt><span>First Name</span></dt>
+                <dd>
+                    <span>{{ applicantPersonalInfo.firstName }}</span>
+                </dd>
+                <dt><span>Middle Name</span></dt>
+                <dd>
+                    <span>{{ applicantPersonalInfo.middleName }}</span>
+                </dd>
+                <dt><span>Last Name</span></dt>
+                <dd>
+                    <span>{{ applicantPersonalInfo.lastName }}</span>
+                </dd>
+                <dt><span>Father Name</span></dt>
+                <dd>
+                    <span>{{ applicantPersonalInfo.fatherName }}</span>
+                </dd>
+                <dt><span>Mother Name</span></dt>
+                <dd>
+                    <span>{{ applicantPersonalInfo.motherName }}</span>
+                </dd>
+                <dt><span>Gender</span></dt>
+                <dd>
+                    <span>{{ applicantPersonalInfo.gender }}</span>
+                </dd>
+                <dt><span>Religion</span></dt>
+                <dd>
+                    <span>{{ applicantPersonalInfo.religion }}</span>
+                </dd>
+                <dt><span>Nationality</span></dt>
+                <dd>
+                    <span>{{ applicantPersonalInfo.nationality }}</span>
+                </dd>
+                <dt><span>Date Of Birth</span></dt>
+                <dd>
+                    <span>{{ applicantPersonalInfo.dateOfBirth }}</span>
+                </dd>
+                <dt><span>Place Of Birth</span></dt>
+                <dd>
+                    <span>{{ applicantPersonalInfo.placeOfBirth }}</span>
+                </dd>
+                <dt><span>Mobile Number</span></dt>
+                <dd>
+                    <span>{{ applicantPersonalInfo.mobileNumber }}</span>
+                </dd>
+                <dt><span>Email Address</span></dt>
+                <dd>
+                    <span>{{ applicantPersonalInfo.emailAddress }}</span>
+                </dd>
+                <dt><span>Marital Status</span></dt>
+                <dd>
+                    <span>{{ applicantPersonalInfo.maritalStatus }}</span>
+                </dd>
+                <dt><span>Applicant</span></dt>
+                <dd>
+                    <div *ngIf="applicantPersonalInfo.applicant">
+                        <a [routerLink]="['/applicant', applicantPersonalInfo.applicant?.id, 'view']">{{ applicantPersonalInfo.applicant?.applicationSerial }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/applicant-personal-info', applicantPersonalInfo.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

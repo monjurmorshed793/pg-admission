@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity ApplicationDeadline.
+    -->
+    <changeSet id="20200921125857-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="semester_id"
+                                 baseTableName="app_deadlines"
+                                 constraintName="fk_app_deadlines_semester_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="mst_semester"/>
+
+        <addForeignKeyConstraint baseColumnNames="program_id"
+                                 baseTableName="app_deadlines"
+                                 constraintName="fk_app_deadlines_program_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="mst_program"/>
+
+    </changeSet>
+</databaseChangeLog>

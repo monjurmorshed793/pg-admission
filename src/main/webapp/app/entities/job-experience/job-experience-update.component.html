@@ -1,0 +1,102 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-job-experience-heading">Create or edit a Job Experience</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_organizationName">Organization Name</label>
+                    <input type="text" class="form-control" name="organizationName" id="field_organizationName"
+                           formControlName="organizationName"/>
+                    <div *ngIf="editForm.get('organizationName')!.invalid && (editForm.get('organizationName')!.dirty || editForm.get('organizationName')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('organizationName')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_designation">Designation</label>
+                    <input type="text" class="form-control" name="designation" id="field_designation"
+                           formControlName="designation"/>
+                    <div *ngIf="editForm.get('designation')!.invalid && (editForm.get('designation')!.dirty || editForm.get('designation')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('designation')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_jobResponsibility">Job Responsibility</label>
+                    <textarea class="form-control" name="jobResponsibility" id="field_jobResponsibility"
+                              formControlName="jobResponsibility"></textarea>
+                    <div *ngIf="editForm.get('jobResponsibility')!.invalid && (editForm.get('jobResponsibility')!.dirty || editForm.get('jobResponsibility')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('jobResponsibility')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_fromDate">From Date</label>
+                    <div class="input-group">
+                        <input id="field_fromDate" type="text" class="form-control" name="fromDate" ngbDatepicker #fromDateDp="ngbDatepicker" formControlName="fromDate"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="fromDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                    <div *ngIf="editForm.get('fromDate')!.invalid && (editForm.get('fromDate')!.dirty || editForm.get('fromDate')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('fromDate')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_toDate">To Date</label>
+                    <div class="input-group">
+                        <input id="field_toDate" type="text" class="form-control" name="toDate" ngbDatepicker #toDateDp="ngbDatepicker" formControlName="toDate"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="toDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_currentlyWorking">Currently Working</label>
+                    <input type="checkbox" class="form-control" name="currentlyWorking" id="field_currentlyWorking"
+                           formControlName="currentlyWorking"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_applicant">Applicant</label>
+                    <select class="form-control" id="field_applicant" name="applicant" formControlName="applicant">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="applicantOption.id === editForm.get('applicant')!.value?.id ? editForm.get('applicant')!.value : applicantOption" *ngFor="let applicantOption of applicants; trackBy: trackById">{{ applicantOption.applicationSerial }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="applicantEducationalInformation">
+            <h2><span>Applicant Educational Information</span> {{ applicantEducationalInformation.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Institute Name</span></dt>
+                <dd>
+                    <span>{{ applicantEducationalInformation.instituteName }}</span>
+                </dd>
+                <dt><span>Board</span></dt>
+                <dd>
+                    <span>{{ applicantEducationalInformation.board }}</span>
+                </dd>
+                <dt><span>Total Marks Grade</span></dt>
+                <dd>
+                    <span>{{ applicantEducationalInformation.totalMarksGrade }}</span>
+                </dd>
+                <dt><span>Division Class Grade</span></dt>
+                <dd>
+                    <span>{{ applicantEducationalInformation.divisionClassGrade }}</span>
+                </dd>
+                <dt><span>Passing Year</span></dt>
+                <dd>
+                    <span>{{ applicantEducationalInformation.passingYear }}</span>
+                </dd>
+                <dt><span>Exam Type</span></dt>
+                <dd>
+                    <div *ngIf="applicantEducationalInformation.examType">
+                        <a [routerLink]="['/exam-type', applicantEducationalInformation.examType?.id, 'view']">{{ applicantEducationalInformation.examType?.examTypeName }}</a>
+                    </div>
+                </dd>
+                <dt><span>Applicant</span></dt>
+                <dd>
+                    <div *ngIf="applicantEducationalInformation.applicant">
+                        <a [routerLink]="['/applicant', applicantEducationalInformation.applicant?.id, 'view']">{{ applicantEducationalInformation.applicant?.applicationSerial }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/applicant-educational-information', applicantEducationalInformation.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-exam-type-heading">Create or edit a Exam Type</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_examTypeCode">Exam Type Code</label>
+                    <input type="text" class="form-control" name="examTypeCode" id="field_examTypeCode"
+                           formControlName="examTypeCode"/>
+                    <div *ngIf="editForm.get('examTypeCode')!.invalid && (editForm.get('examTypeCode')!.dirty || editForm.get('examTypeCode')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('examTypeCode')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_examTypeName">Exam Type Name</label>
+                    <input type="text" class="form-control" name="examTypeName" id="field_examTypeName"
+                           formControlName="examTypeName"/>
+                    <div *ngIf="editForm.get('examTypeName')!.invalid && (editForm.get('examTypeName')!.dirty || editForm.get('examTypeName')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('examTypeName')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

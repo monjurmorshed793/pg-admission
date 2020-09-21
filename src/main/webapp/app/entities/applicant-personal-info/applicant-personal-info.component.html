@@ -1,0 +1,105 @@
+<div>
+    <h2 id="page-heading">
+        <span>Applicant Personal Infos</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-applicant-personal-info" [routerLink]="['/applicant-personal-info/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new Applicant Personal Info
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="applicantPersonalInfos?.length === 0">
+        <span>No applicantPersonalInfos found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="applicantPersonalInfos && applicantPersonalInfos.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="applicationSerial"><span>Application Serial</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="fullName"><span>Full Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="firstName"><span>First Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="middleName"><span>Middle Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="lastName"><span>Last Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="fatherName"><span>Father Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="motherName"><span>Mother Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="gender"><span>Gender</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="religion"><span>Religion</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="nationality"><span>Nationality</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="dateOfBirth"><span>Date Of Birth</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="placeOfBirth"><span>Place Of Birth</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="mobileNumber"><span>Mobile Number</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="emailAddress"><span>Email Address</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="maritalStatus"><span>Marital Status</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="applicant.applicationSerial"><span>Applicant</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let applicantPersonalInfo of applicantPersonalInfos ;trackBy: trackId">
+                    <td><a [routerLink]="['/applicant-personal-info', applicantPersonalInfo.id, 'view']">{{ applicantPersonalInfo.id }}</a></td>
+                    <td>{{ applicantPersonalInfo.applicationSerial }}</td>
+                    <td>{{ applicantPersonalInfo.fullName }}</td>
+                    <td>{{ applicantPersonalInfo.firstName }}</td>
+                    <td>{{ applicantPersonalInfo.middleName }}</td>
+                    <td>{{ applicantPersonalInfo.lastName }}</td>
+                    <td>{{ applicantPersonalInfo.fatherName }}</td>
+                    <td>{{ applicantPersonalInfo.motherName }}</td>
+                    <td>{{ applicantPersonalInfo.gender }}</td>
+                    <td>{{ applicantPersonalInfo.religion }}</td>
+                    <td>{{ applicantPersonalInfo.nationality }}</td>
+                    <td>{{ applicantPersonalInfo.dateOfBirth | date:'mediumDate' }}</td>
+                    <td>{{ applicantPersonalInfo.placeOfBirth }}</td>
+                    <td>{{ applicantPersonalInfo.mobileNumber }}</td>
+                    <td>{{ applicantPersonalInfo.emailAddress }}</td>
+                    <td>{{ applicantPersonalInfo.maritalStatus }}</td>
+                    <td>
+                        <div *ngIf="applicantPersonalInfo.applicant">
+                            <a [routerLink]="['/applicant', applicantPersonalInfo.applicant?.id, 'view']" >{{ applicantPersonalInfo.applicant?.applicationSerial }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/applicant-personal-info', applicantPersonalInfo.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/applicant-personal-info', applicantPersonalInfo.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(applicantPersonalInfo)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="applicantPersonalInfos && applicantPersonalInfos.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

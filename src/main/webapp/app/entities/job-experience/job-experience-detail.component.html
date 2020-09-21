@@ -1,0 +1,56 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="jobExperience">
+            <h2><span>Job Experience</span> {{ jobExperience.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Organization Name</span></dt>
+                <dd>
+                    <span>{{ jobExperience.organizationName }}</span>
+                </dd>
+                <dt><span>Designation</span></dt>
+                <dd>
+                    <span>{{ jobExperience.designation }}</span>
+                </dd>
+                <dt><span>Job Responsibility</span></dt>
+                <dd>
+                    <span>{{ jobExperience.jobResponsibility }}</span>
+                </dd>
+                <dt><span>From Date</span></dt>
+                <dd>
+                    <span>{{ jobExperience.fromDate }}</span>
+                </dd>
+                <dt><span>To Date</span></dt>
+                <dd>
+                    <span>{{ jobExperience.toDate }}</span>
+                </dd>
+                <dt><span>Currently Working</span></dt>
+                <dd>
+                    <span>{{ jobExperience.currentlyWorking }}</span>
+                </dd>
+                <dt><span>Applicant</span></dt>
+                <dd>
+                    <div *ngIf="jobExperience.applicant">
+                        <a [routerLink]="['/applicant', jobExperience.applicant?.id, 'view']">{{ jobExperience.applicant?.applicationSerial }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/job-experience', jobExperience.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

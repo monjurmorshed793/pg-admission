@@ -1,0 +1,33 @@
+{
+  "name": "Thana",
+  "fields": [
+    {
+      "fieldName": "thanaName",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "district",
+      "otherEntityRelationshipName": "thana",
+      "relationshipValidateRules": "required",
+      "relationshipName": "district",
+      "otherEntityField": "districtName"
+    }
+  ],
+  "changelogDate": "20200921125757",
+  "entityTableName": "mst_thana",
+  "dto": "no",
+  "pagination": "infinite-scroll",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

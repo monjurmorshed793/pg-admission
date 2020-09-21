@@ -1,0 +1,85 @@
+<div>
+    <h2 id="page-heading">
+        <span>Applicant Addresses</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-applicant-address" [routerLink]="['/applicant-address/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new Applicant Address
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="applicantAddresses?.length === 0">
+        <span>No applicantAddresses found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="applicantAddresses && applicantAddresses.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="applicationSerial"><span>Application Serial</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="addressType"><span>Address Type</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="thanaOther"><span>Thana Other</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="line1"><span>Line 1</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="line2"><span>Line 2</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="applicant.applicationSerial"><span>Applicant</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let applicantAddress of applicantAddresses ;trackBy: trackId">
+                    <td><a [routerLink]="['/applicant-address', applicantAddress.id, 'view']">{{ applicantAddress.id }}</a></td>
+                    <td>{{ applicantAddress.applicationSerial }}</td>
+                    <td>{{ applicantAddress.addressType }}</td>
+                    <td>{{ applicantAddress.thanaOther }}</td>
+                    <td>{{ applicantAddress.line1 }}</td>
+                    <td>{{ applicantAddress.line2 }}</td>
+                    <td>
+                        <div *ngIf="applicantAddress.applicant">
+                            <a [routerLink]="['/applicant', applicantAddress.applicant?.id, 'view']" >{{ applicantAddress.applicant?.applicationSerial }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/applicant-address', applicantAddress.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/applicant-address', applicantAddress.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(applicantAddress)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="applicantAddresses && applicantAddresses.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

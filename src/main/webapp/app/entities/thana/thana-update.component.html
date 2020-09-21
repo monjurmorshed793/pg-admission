@@ -1,0 +1,52 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-thana-heading">Create or edit a Thana</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_thanaName">Thana Name</label>
+                    <input type="text" class="form-control" name="thanaName" id="field_thanaName"
+                           formControlName="thanaName"/>
+                    <div *ngIf="editForm.get('thanaName')!.invalid && (editForm.get('thanaName')!.dirty || editForm.get('thanaName')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('thanaName')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_district">District</label>
+                    <select class="form-control" id="field_district" name="district" formControlName="district">
+                        <option *ngIf="!editForm.get('district')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="districtOption.id === editForm.get('district')!.value?.id ? editForm.get('district')!.value : districtOption" *ngFor="let districtOption of districts; trackBy: trackById">{{ districtOption.districtName }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('district')!.invalid && (editForm.get('district')!.dirty || editForm.get('district')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('district')?.errors?.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

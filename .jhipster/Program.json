@@ -1,0 +1,33 @@
+{
+  "name": "Program",
+  "fields": [
+    {
+      "fieldName": "programNameShort",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "programName",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "maxlength"
+      ],
+      "fieldValidateRulesMaxlength": "500"
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20200921125457",
+  "entityTableName": "mst_program",
+  "dto": "no",
+  "pagination": "infinite-scroll",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

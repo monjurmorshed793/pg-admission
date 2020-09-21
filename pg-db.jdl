@@ -1,0 +1,136 @@
+entity Semester (mst_semester){
+    semesterName String required,
+    isActive Boolean required
+}
+
+entity Program (mst_program) {
+    programNameShort String required,
+    programName String required maxlength(500)
+}
+
+entity Division (mst_division) {
+   divisionName String required
+}
+
+entity District (mst_district){
+    districtName String required
+}
+
+entity Thana (mst_thana){
+    thanaName String required
+}
+
+entity ApplicationDeadline (app_deadlines){
+    fromDate Instant required,
+    toDate Instant required
+}
+
+entity Applicant (mst_applicant){
+    applicationSerial Integer required,
+    status ApplicationStatus,
+    appliedOn Instant,
+    applicationFeePaidOn Instant,
+    selectedRejectedOn Instant
+}
+
+entity ApplicantPersonalInfo (personal_info){
+    applicationSerial Integer,
+    fullName String required maxlength(500),
+    firstName String required,
+    middleName String,
+    lastName String,
+    fatherName String required,
+    motherName String required,
+    gender Gender required,
+    religion Religion required,
+    nationality String required,
+    dateOfBirth LocalDate required,
+    placeOfBirth String maxlength(500),
+    mobileNumber String required,
+    emailAddress String required,
+    maritalStatus MaritalStatus required
+}
+
+entity ApplicantAddress (address){
+    applicationSerial Integer,
+    addressType AddressType required,
+    thanaOther String,
+    line1 String required maxlength(100),
+    line2 String maxlength(100)
+}
+
+entity ExamType (mst_exam_type){
+    examTypeCode String required,
+    examTypeName String required
+}
+
+entity ApplicantEducationalInformation (edu_info){
+    instituteName String required,
+    board String,
+    totalMarksGrade String,
+    divisionClassGrade String,
+    passingYear Integer required
+}
+
+entity JobExperience (job_experience){
+  organizationName String required,
+  designation String required,
+  jobResponsibility TextBlob required,
+  fromDate LocalDate required,
+  toDate LocalDate,
+  currentlyWorking Boolean
+}
+
+enum AddressType{
+    PRESENT,
+    PERMANENT
+}
+
+enum ApplicationStatus{
+    NOT_APPLIED,
+    APPLIED,
+    CANCELLED,
+    EXPIRED
+}
+
+enum Gender{
+    MALE,
+    FEMALE,
+    OTHERS
+}
+
+enum Religion{
+     ISLAM,
+     HINDU,
+     BUDDHIST,
+     CHRISTIAN,
+     OTHER
+}
+
+enum MaritalStatus{
+	MARRIED,
+	UNMARRIED
+}
+
+relationship OneToOne{
+ ApplicantPersonalInfo{applicant(applicationSerial)} to Applicant{applicantPersonalInformation(fullName)}
+
+}
+
+relationship OneToMany{
+   Applicant{applicantEducationalInformation} to ApplicantEducationalInformation{applicant(applicationSerial)},
+   Applicant{jobExperience} to JobExperience{applicant(applicationSerial)},
+   Applicant{applicantAddress}  to ApplicantAddress{applicant(applicationSerial)}
+}
+
+relationship ManyToOne{
+ ApplicationDeadline{semester(semesterName) required} to Semester,
+ ApplicationDeadline{program(programNameShort) required} to Program,
+ ApplicantEducationalInformation{examType(examTypeName) required} to ExamType,
+ District{division(divisionName) required} to Division,
+ Thana{district(districtName) required} to District
+}
+
+paginate Semester, Division, District, Thana, Program, ApplicationDeadline, ExamType with infinite-scroll
+paginate Applicant, ApplicantPersonalInfo, ApplicantAddress, ApplicantEducationalInformation, JobExperience with pagination
+service * with serviceClass

@@ -1,0 +1,52 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="applicantAddress">
+            <h2><span>Applicant Address</span> {{ applicantAddress.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Application Serial</span></dt>
+                <dd>
+                    <span>{{ applicantAddress.applicationSerial }}</span>
+                </dd>
+                <dt><span>Address Type</span></dt>
+                <dd>
+                    <span>{{ applicantAddress.addressType }}</span>
+                </dd>
+                <dt><span>Thana Other</span></dt>
+                <dd>
+                    <span>{{ applicantAddress.thanaOther }}</span>
+                </dd>
+                <dt><span>Line 1</span></dt>
+                <dd>
+                    <span>{{ applicantAddress.line1 }}</span>
+                </dd>
+                <dt><span>Line 2</span></dt>
+                <dd>
+                    <span>{{ applicantAddress.line2 }}</span>
+                </dd>
+                <dt><span>Applicant</span></dt>
+                <dd>
+                    <div *ngIf="applicantAddress.applicant">
+                        <a [routerLink]="['/applicant', applicantAddress.applicant?.id, 'view']">{{ applicantAddress.applicant?.applicationSerial }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/applicant-address', applicantAddress.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

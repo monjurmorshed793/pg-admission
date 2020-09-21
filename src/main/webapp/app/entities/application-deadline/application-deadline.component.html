@@ -1,0 +1,75 @@
+<div>
+    <h2 id="page-heading">
+        <span>Application Deadlines</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-application-deadline" [routerLink]="['/application-deadline/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new Application Deadline
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="applicationDeadlines?.length === 0">
+        <span>No applicationDeadlines found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="applicationDeadlines && applicationDeadlines.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="fromDate"><span>From Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="toDate"><span>To Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="semester.semesterName"><span>Semester</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="program.programNameShort"><span>Program</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+                <tr *ngFor="let applicationDeadline of applicationDeadlines ;trackBy: trackId">
+                    <td><a [routerLink]="['/application-deadline', applicationDeadline.id, 'view']">{{ applicationDeadline.id }}</a></td>
+                    <td>{{ applicationDeadline.fromDate | date:'medium' }}</td>
+                    <td>{{ applicationDeadline.toDate | date:'medium' }}</td>
+                    <td>
+                        <div *ngIf="applicationDeadline.semester">
+                            <a [routerLink]="['/semester', applicationDeadline.semester?.id, 'view']" >{{ applicationDeadline.semester?.semesterName }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="applicationDeadline.program">
+                            <a [routerLink]="['/program', applicationDeadline.program?.id, 'view']" >{{ applicationDeadline.program?.programNameShort }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/application-deadline', applicationDeadline.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/application-deadline', applicationDeadline.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(applicationDeadline)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+{
+  "name": "ApplicantAddress",
+  "fields": [
+    {
+      "fieldName": "applicationSerial",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "addressType",
+      "fieldType": "AddressType",
+      "fieldValues": "PRESENT,PERMANENT",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "thanaOther",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "line1",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "maxlength"
+      ],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "line2",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "maxlength"
+      ],
+      "fieldValidateRulesMaxlength": "100"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "applicant",
+      "otherEntityRelationshipName": "applicantAddress",
+      "relationshipName": "applicant",
+      "otherEntityField": "applicationSerial"
+    }
+  ],
+  "changelogDate": "20200921130157",
+  "entityTableName": "address",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

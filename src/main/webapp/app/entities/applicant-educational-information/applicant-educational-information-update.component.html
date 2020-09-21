@@ -1,0 +1,94 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-applicant-educational-information-heading">Create or edit a Applicant Educational Information</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_instituteName">Institute Name</label>
+                    <input type="text" class="form-control" name="instituteName" id="field_instituteName"
+                           formControlName="instituteName"/>
+                    <div *ngIf="editForm.get('instituteName')!.invalid && (editForm.get('instituteName')!.dirty || editForm.get('instituteName')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('instituteName')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_board">Board</label>
+                    <input type="text" class="form-control" name="board" id="field_board"
+                           formControlName="board"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_totalMarksGrade">Total Marks Grade</label>
+                    <input type="text" class="form-control" name="totalMarksGrade" id="field_totalMarksGrade"
+                           formControlName="totalMarksGrade"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_divisionClassGrade">Division Class Grade</label>
+                    <input type="text" class="form-control" name="divisionClassGrade" id="field_divisionClassGrade"
+                           formControlName="divisionClassGrade"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_passingYear">Passing Year</label>
+                    <input type="number" class="form-control" name="passingYear" id="field_passingYear"
+                           formControlName="passingYear"/>
+                    <div *ngIf="editForm.get('passingYear')!.invalid && (editForm.get('passingYear')!.dirty || editForm.get('passingYear')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('passingYear')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('passingYear')?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_examType">Exam Type</label>
+                    <select class="form-control" id="field_examType" name="examType" formControlName="examType">
+                        <option *ngIf="!editForm.get('examType')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="examTypeOption.id === editForm.get('examType')!.value?.id ? editForm.get('examType')!.value : examTypeOption" *ngFor="let examTypeOption of examtypes; trackBy: trackById">{{ examTypeOption.examTypeName }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('examType')!.invalid && (editForm.get('examType')!.dirty || editForm.get('examType')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('examType')?.errors?.required">
+                        This field is required.
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_applicant">Applicant</label>
+                    <select class="form-control" id="field_applicant" name="applicant" formControlName="applicant">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="applicantOption.id === editForm.get('applicant')!.value?.id ? editForm.get('applicant')!.value : applicantOption" *ngFor="let applicantOption of applicants; trackBy: trackById">{{ applicantOption.applicationSerial }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
