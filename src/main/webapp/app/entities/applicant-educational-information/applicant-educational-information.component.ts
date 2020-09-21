@@ -12,7 +12,7 @@ import { ApplicantEducationalInformationService } from './applicant-educational-
 import { ApplicantEducationalInformationDeleteDialogComponent } from './applicant-educational-information-delete-dialog.component';
 
 @Component({
-  selector: 'jhi-applicant-educational-information',
+  selector: 'pg-applicant-educational-information',
   templateUrl: './applicant-educational-information.component.html',
 })
 export class ApplicantEducationalInformationComponent implements OnInit, OnDestroy {

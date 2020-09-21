@@ -11,7 +11,7 @@ import { ProgramService } from './program.service';
 import { ProgramDeleteDialogComponent } from './program-delete-dialog.component';
 
 @Component({
-  selector: 'jhi-program',
+  selector: 'pg-program',
   templateUrl: './program.component.html',
 })
 export class ProgramComponent implements OnInit, OnDestroy {

@@ -12,7 +12,7 @@ import { ApplicantService } from './applicant.service';
 import { ApplicantDeleteDialogComponent } from './applicant-delete-dialog.component';
 
 @Component({
-  selector: 'jhi-applicant',
+  selector: 'pg-applicant',
   templateUrl: './applicant.component.html',
 })
 export class ApplicantComponent implements OnInit, OnDestroy {

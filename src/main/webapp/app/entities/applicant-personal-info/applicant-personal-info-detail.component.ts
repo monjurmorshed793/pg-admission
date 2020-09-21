@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { IApplicantPersonalInfo } from 'app/shared/model/applicant-personal-info.model';
 
 @Component({
-  selector: 'jhi-applicant-personal-info-detail',
+  selector: 'pg-applicant-personal-info-detail',
   templateUrl: './applicant-personal-info-detail.component.html',
 })
 export class ApplicantPersonalInfoDetailComponent implements OnInit {

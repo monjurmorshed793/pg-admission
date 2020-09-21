@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { IDivision } from 'app/shared/model/division.model';
 
 @Component({
-  selector: 'jhi-division-detail',
+  selector: 'pg-division-detail',
   templateUrl: './division-detail.component.html',
 })
 export class DivisionDetailComponent implements OnInit {

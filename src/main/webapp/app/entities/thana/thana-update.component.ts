@@ -11,7 +11,7 @@ import { IDistrict } from 'app/shared/model/district.model';
 import { DistrictService } from 'app/entities/district/district.service';
 
 @Component({
-  selector: 'jhi-thana-update',
+  selector: 'pg-thana-update',
   templateUrl: './thana-update.component.html',
 })
 export class ThanaUpdateComponent implements OnInit {

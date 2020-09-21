@@ -9,7 +9,7 @@ import { ISemester, Semester } from 'app/shared/model/semester.model';
 import { SemesterService } from './semester.service';
 
 @Component({
-  selector: 'jhi-semester-update',
+  selector: 'pg-semester-update',
   templateUrl: './semester-update.component.html',
 })
 export class SemesterUpdateComponent implements OnInit {

@@ -11,7 +11,7 @@ import { ApplicationDeadlineService } from './application-deadline.service';
 import { ApplicationDeadlineDeleteDialogComponent } from './application-deadline-delete-dialog.component';
 
 @Component({
-  selector: 'jhi-application-deadline',
+  selector: 'pg-application-deadline',
   templateUrl: './application-deadline.component.html',
 })
 export class ApplicationDeadlineComponent implements OnInit, OnDestroy {

@@ -18,7 +18,7 @@ import { ApplicantService } from 'app/entities/applicant/applicant.service';
 type SelectableEntity = IExamType | IApplicant;
 
 @Component({
-  selector: 'jhi-applicant-educational-information-update',
+  selector: 'pg-applicant-educational-information-update',
   templateUrl: './applicant-educational-information-update.component.html',
 })
 export class ApplicantEducationalInformationUpdateComponent implements OnInit {

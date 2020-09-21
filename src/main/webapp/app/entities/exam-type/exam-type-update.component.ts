@@ -9,7 +9,7 @@ import { IExamType, ExamType } from 'app/shared/model/exam-type.model';
 import { ExamTypeService } from './exam-type.service';
 
 @Component({
-  selector: 'jhi-exam-type-update',
+  selector: 'pg-exam-type-update',
   templateUrl: './exam-type-update.component.html',
 })
 export class ExamTypeUpdateComponent implements OnInit {

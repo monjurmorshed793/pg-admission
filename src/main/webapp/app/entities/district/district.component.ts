@@ -11,7 +11,7 @@ import { DistrictService } from './district.service';
 import { DistrictDeleteDialogComponent } from './district-delete-dialog.component';
 
 @Component({
-  selector: 'jhi-district',
+  selector: 'pg-district',
   templateUrl: './district.component.html',
 })
 export class DistrictComponent implements OnInit, OnDestroy {

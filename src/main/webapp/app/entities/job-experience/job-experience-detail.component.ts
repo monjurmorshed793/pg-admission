@@ -5,7 +5,7 @@ import { JhiDataUtils } from 'ng-jhipster';
 import { IJobExperience } from 'app/shared/model/job-experience.model';
 
 @Component({
-  selector: 'jhi-job-experience-detail',
+  selector: 'pg-job-experience-detail',
   templateUrl: './job-experience-detail.component.html',
 })
 export class JobExperienceDetailComponent implements OnInit {

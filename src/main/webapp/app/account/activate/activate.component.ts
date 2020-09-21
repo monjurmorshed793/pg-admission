@@ -6,7 +6,7 @@ import { LoginModalService } from 'app/core/login/login-modal.service';
 import { ActivateService } from './activate.service';
 
 @Component({
-  selector: 'jhi-activate',
+  selector: 'pg-activate',
   templateUrl: './activate.component.html',
 })
 export class ActivateComponent implements OnInit {

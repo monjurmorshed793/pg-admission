@@ -11,7 +11,7 @@ import { ThanaService } from './thana.service';
 import { ThanaDeleteDialogComponent } from './thana-delete-dialog.component';
 
 @Component({
-  selector: 'jhi-thana',
+  selector: 'pg-thana',
   templateUrl: './thana.component.html',
 })
 export class ThanaComponent implements OnInit, OnDestroy {

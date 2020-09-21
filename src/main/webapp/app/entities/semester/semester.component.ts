@@ -11,7 +11,7 @@ import { SemesterService } from './semester.service';
 import { SemesterDeleteDialogComponent } from './semester-delete-dialog.component';
 
 @Component({
-  selector: 'jhi-semester',
+  selector: 'pg-semester',
   templateUrl: './semester.component.html',
 })
 export class SemesterComponent implements OnInit, OnDestroy {

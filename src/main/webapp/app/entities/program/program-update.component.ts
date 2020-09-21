@@ -9,7 +9,7 @@ import { IProgram, Program } from 'app/shared/model/program.model';
 import { ProgramService } from './program.service';
 
 @Component({
-  selector: 'jhi-program-update',
+  selector: 'pg-program-update',
   templateUrl: './program-update.component.html',
 })
 export class ProgramUpdateComponent implements OnInit {

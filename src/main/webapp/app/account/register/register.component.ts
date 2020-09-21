@@ -7,7 +7,7 @@ import { LoginModalService } from 'app/core/login/login-modal.service';
 import { RegisterService } from './register.service';
 
 @Component({
-  selector: 'jhi-register',
+  selector: 'pg-register',
   templateUrl: './register.component.html',
 })
 export class RegisterComponent implements AfterViewInit {

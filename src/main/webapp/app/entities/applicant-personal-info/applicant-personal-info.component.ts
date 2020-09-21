@@ -12,7 +12,7 @@ import { ApplicantPersonalInfoService } from './applicant-personal-info.service'
 import { ApplicantPersonalInfoDeleteDialogComponent } from './applicant-personal-info-delete-dialog.component';
 
 @Component({
-  selector: 'jhi-applicant-personal-info',
+  selector: 'pg-applicant-personal-info',
   templateUrl: './applicant-personal-info.component.html',
 })
 export class ApplicantPersonalInfoComponent implements OnInit, OnDestroy {

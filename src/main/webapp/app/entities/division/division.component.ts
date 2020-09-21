@@ -11,7 +11,7 @@ import { DivisionService } from './division.service';
 import { DivisionDeleteDialogComponent } from './division-delete-dialog.component';
 
 @Component({
-  selector: 'jhi-division',
+  selector: 'pg-division',
   templateUrl: './division.component.html',
 })
 export class DivisionComponent implements OnInit, OnDestroy {

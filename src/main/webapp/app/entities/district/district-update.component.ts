@@ -11,7 +11,7 @@ import { IDivision } from 'app/shared/model/division.model';
 import { DivisionService } from 'app/entities/division/division.service';
 
 @Component({
-  selector: 'jhi-district-update',
+  selector: 'pg-district-update',
   templateUrl: './district-update.component.html',
 })
 export class DistrictUpdateComponent implements OnInit {

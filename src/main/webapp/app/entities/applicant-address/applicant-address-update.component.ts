@@ -11,7 +11,7 @@ import { IApplicant } from 'app/shared/model/applicant.model';
 import { ApplicantService } from 'app/entities/applicant/applicant.service';
 
 @Component({
-  selector: 'jhi-applicant-address-update',
+  selector: 'pg-applicant-address-update',
   templateUrl: './applicant-address-update.component.html',
 })
 export class ApplicantAddressUpdateComponent implements OnInit {

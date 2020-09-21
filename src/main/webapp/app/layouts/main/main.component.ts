@@ -5,7 +5,7 @@ import { Router, ActivatedRouteSnapshot, NavigationEnd, NavigationError } from '
 import { AccountService } from 'app/core/auth/account.service';
 
 @Component({
-  selector: 'jhi-main',
+  selector: 'pg-main',
   templateUrl: './main.component.html',
 })
 export class MainComponent implements OnInit {

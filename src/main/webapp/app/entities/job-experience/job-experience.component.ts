@@ -12,7 +12,7 @@ import { JobExperienceService } from './job-experience.service';
 import { JobExperienceDeleteDialogComponent } from './job-experience-delete-dialog.component';
 
 @Component({
-  selector: 'jhi-job-experience',
+  selector: 'pg-job-experience',
   templateUrl: './job-experience.component.html',
 })
 export class JobExperienceComponent implements OnInit, OnDestroy {

@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { IDistrict } from 'app/shared/model/district.model';
 
 @Component({
-  selector: 'jhi-district-detail',
+  selector: 'pg-district-detail',
   templateUrl: './district-detail.component.html',
 })
 export class DistrictDetailComponent implements OnInit {

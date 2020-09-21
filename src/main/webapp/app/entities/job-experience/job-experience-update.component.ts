@@ -13,7 +13,7 @@ import { IApplicant } from 'app/shared/model/applicant.model';
 import { ApplicantService } from 'app/entities/applicant/applicant.service';
 
 @Component({
-  selector: 'jhi-job-experience-update',
+  selector: 'pg-job-experience-update',
   templateUrl: './job-experience-update.component.html',
 })
 export class JobExperienceUpdateComponent implements OnInit {

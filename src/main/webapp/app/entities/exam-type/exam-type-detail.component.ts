@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { IExamType } from 'app/shared/model/exam-type.model';
 
 @Component({
-  selector: 'jhi-exam-type-detail',
+  selector: 'pg-exam-type-detail',
   templateUrl: './exam-type-detail.component.html',
 })
 export class ExamTypeDetailComponent implements OnInit {

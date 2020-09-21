@@ -5,7 +5,7 @@ import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/user/account.model';
 
 @Component({
-  selector: 'jhi-settings',
+  selector: 'pg-settings',
   templateUrl: './settings.component.html',
 })
 export class SettingsComponent implements OnInit {

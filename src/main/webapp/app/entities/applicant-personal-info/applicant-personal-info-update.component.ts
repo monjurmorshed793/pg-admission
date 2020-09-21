@@ -12,7 +12,7 @@ import { IApplicant } from 'app/shared/model/applicant.model';
 import { ApplicantService } from 'app/entities/applicant/applicant.service';
 
 @Component({
-  selector: 'jhi-applicant-personal-info-update',
+  selector: 'pg-applicant-personal-info-update',
   templateUrl: './applicant-personal-info-update.component.html',
 })
 export class ApplicantPersonalInfoUpdateComponent implements OnInit {

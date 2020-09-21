@@ -12,7 +12,7 @@ import { ApplicantAddressService } from './applicant-address.service';
 import { ApplicantAddressDeleteDialogComponent } from './applicant-address-delete-dialog.component';
 
 @Component({
-  selector: 'jhi-applicant-address',
+  selector: 'pg-applicant-address',
   templateUrl: './applicant-address.component.html',
 })
 export class ApplicantAddressComponent implements OnInit, OnDestroy {

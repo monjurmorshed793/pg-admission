@@ -9,7 +9,7 @@ import { IDivision, Division } from 'app/shared/model/division.model';
 import { DivisionService } from './division.service';
 
 @Component({
-  selector: 'jhi-division-update',
+  selector: 'pg-division-update',
   templateUrl: './division-update.component.html',
 })
 export class DivisionUpdateComponent implements OnInit {

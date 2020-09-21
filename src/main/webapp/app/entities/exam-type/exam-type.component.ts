@@ -11,7 +11,7 @@ import { ExamTypeService } from './exam-type.service';
 import { ExamTypeDeleteDialogComponent } from './exam-type-delete-dialog.component';
 
 @Component({
-  selector: 'jhi-exam-type',
+  selector: 'pg-exam-type',
   templateUrl: './exam-type.component.html',
 })
 export class ExamTypeComponent implements OnInit, OnDestroy {

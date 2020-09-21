@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ISemester } from 'app/shared/model/semester.model';
 
 @Component({
-  selector: 'jhi-semester-detail',
+  selector: 'pg-semester-detail',
   templateUrl: './semester-detail.component.html',
 })
 export class SemesterDetailComponent implements OnInit {

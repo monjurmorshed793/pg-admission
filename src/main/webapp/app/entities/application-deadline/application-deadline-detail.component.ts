@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { IApplicationDeadline } from 'app/shared/model/application-deadline.model';
 
 @Component({
-  selector: 'jhi-application-deadline-detail',
+  selector: 'pg-application-deadline-detail',
   templateUrl: './application-deadline-detail.component.html',
 })
 export class ApplicationDeadlineDetailComponent implements OnInit {

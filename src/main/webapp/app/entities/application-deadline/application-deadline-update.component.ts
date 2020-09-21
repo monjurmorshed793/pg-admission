@@ -17,7 +17,7 @@ import { ProgramService } from 'app/entities/program/program.service';
 type SelectableEntity = ISemester | IProgram;
 
 @Component({
-  selector: 'jhi-application-deadline-update',
+  selector: 'pg-application-deadline-update',
   templateUrl: './application-deadline-update.component.html',
 })
 export class ApplicationDeadlineUpdateComponent implements OnInit {

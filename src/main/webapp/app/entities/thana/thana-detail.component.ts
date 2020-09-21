@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { IThana } from 'app/shared/model/thana.model';
 
 @Component({
-  selector: 'jhi-thana-detail',
+  selector: 'pg-thana-detail',
   templateUrl: './thana-detail.component.html',
 })
 export class ThanaDetailComponent implements OnInit {
