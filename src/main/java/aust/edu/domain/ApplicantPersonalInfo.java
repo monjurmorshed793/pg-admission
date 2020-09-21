@@ -21,7 +21,7 @@ import aust.edu.domain.enumeration.MaritalStatus;
 @Entity
 @Table(name = "personal_info")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class ApplicantPersonalInfo implements Serializable {
+public class ApplicantPersonalInfo extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

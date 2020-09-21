@@ -26,6 +26,7 @@
     <include file="config/liquibase/changelog/20200921130257_added_entity_ExamType.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200921130357_added_entity_ApplicantEducationalInformation.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200921130457_added_entity_JobExperience.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200921133157_added_entity_EntityAuditEvent.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20200921125657_added_entity_constraints_District.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200921125757_added_entity_constraints_Thana.xml" relativeToChangelogFile="false"/>

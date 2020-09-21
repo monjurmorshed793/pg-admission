@@ -20,7 +20,7 @@ import aust.edu.domain.enumeration.ApplicationStatus;
 @Entity
 @Table(name = "mst_applicant")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Applicant implements Serializable {
+public class Applicant extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

@@ -16,7 +16,7 @@ import java.time.Instant;
 @Entity
 @Table(name = "app_deadlines")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class ApplicationDeadline implements Serializable {
+public class ApplicationDeadline extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

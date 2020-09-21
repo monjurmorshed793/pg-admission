@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "mst_exam_type")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class ExamType implements Serializable {
+public class ExamType extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

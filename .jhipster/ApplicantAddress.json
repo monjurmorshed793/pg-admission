@@ -9,9 +9,7 @@
       "fieldName": "addressType",
       "fieldType": "AddressType",
       "fieldValues": "PRESENT,PERMANENT",
-      "fieldValidateRules": [
-        "required"
-      ]
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "thanaOther",
@@ -20,18 +18,13 @@
     {
       "fieldName": "line1",
       "fieldType": "String",
-      "fieldValidateRules": [
-        "required",
-        "maxlength"
-      ],
+      "fieldValidateRules": ["required", "maxlength"],
       "fieldValidateRulesMaxlength": "100"
     },
     {
       "fieldName": "line2",
       "fieldType": "String",
-      "fieldValidateRules": [
-        "maxlength"
-      ],
+      "fieldValidateRules": ["maxlength"],
       "fieldValidateRulesMaxlength": "100"
     }
   ],
@@ -54,5 +47,6 @@
   "readOnly": false,
   "embedded": false,
   "clientRootFolder": "",
-  "applications": "*"
+  "applications": "*",
+  "enableEntityAudit": true
 }
