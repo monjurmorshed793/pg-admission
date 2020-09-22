@@ -26,7 +26,7 @@
     "useSass": true,
     "clientPackageManager": "npm",
     "clientFramework": "angularX",
-    "clientTheme": "lux",
+    "clientTheme": "cosmo",
     "clientThemeVariant": "primary",
     "creationTimestamp": 1600692364116,
     "testFrameworks": [],
@@ -41,6 +41,6 @@
   "generator-jhipster-entity-audit": {
     "auditFramework": "custom",
     "auditPage": false,
-    "lastLiquibaseTimestamp": 1600755923000
+    "lastLiquibaseTimestamp": 1600793609000
   }
 }
