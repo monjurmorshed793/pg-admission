@@ -9,9 +9,7 @@ import { LoginModalService } from 'app/core/login/login-modal.service';
   styleUrls: ['./home-ext.component.scss'],
 })
 export class HomeExtComponent extends HomeComponent implements OnInit, OnDestroy {
-  constructor(accountService: AccountService, loginModalService: LoginModalService) {
+  constructor(protected accountService: AccountService, protected loginModalService: LoginModalService) {
     super(accountService, loginModalService);
   }
-
-  ngOnInit(): void {}
 }

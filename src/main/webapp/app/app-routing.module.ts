@@ -27,7 +27,7 @@ const LAYOUT_ROUTES = [navbarExtRoute, ...errorRoute];
         },
         ...LAYOUT_ROUTES,
       ],
-      { enableTracing: DEBUG_INFO_ENABLED }
+      { enableTracing: false }
     ),
   ],
   exports: [RouterModule],
