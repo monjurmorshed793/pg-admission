@@ -48,6 +48,7 @@ public class CacheConfiguration {
             createCache(cm, aust.edu.domain.User.class.getName());
             createCache(cm, aust.edu.domain.Authority.class.getName());
             createCache(cm, aust.edu.domain.User.class.getName() + ".authorities");
+            createCache(cm, aust.edu.domain.EntityAuditEvent.class.getName());
             createCache(cm, aust.edu.domain.Semester.class.getName());
             createCache(cm, aust.edu.domain.Program.class.getName());
             createCache(cm, aust.edu.domain.Division.class.getName());
@@ -63,7 +64,6 @@ public class CacheConfiguration {
             createCache(cm, aust.edu.domain.ExamType.class.getName());
             createCache(cm, aust.edu.domain.ApplicantEducationalInformation.class.getName());
             createCache(cm, aust.edu.domain.JobExperience.class.getName());
-            createCache(cm, aust.edu.domain.EntityAuditEvent.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

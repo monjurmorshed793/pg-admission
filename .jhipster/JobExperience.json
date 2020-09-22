@@ -1,55 +1,63 @@
 {
-  "name": "JobExperience",
-  "fields": [
-    {
-      "fieldName": "organizationName",
-      "fieldType": "String",
-      "fieldValidateRules": ["required"]
-    },
-    {
-      "fieldName": "designation",
-      "fieldType": "String",
-      "fieldValidateRules": ["required"]
-    },
-    {
-      "fieldName": "jobResponsibility",
-      "fieldType": "byte[]",
-      "fieldTypeBlobContent": "text",
-      "fieldValidateRules": ["required"]
-    },
-    {
-      "fieldName": "fromDate",
-      "fieldType": "LocalDate",
-      "fieldValidateRules": ["required"]
-    },
-    {
-      "fieldName": "toDate",
-      "fieldType": "LocalDate"
-    },
-    {
-      "fieldName": "currentlyWorking",
-      "fieldType": "Boolean"
-    }
-  ],
-  "relationships": [
-    {
-      "relationshipType": "many-to-one",
-      "otherEntityName": "applicant",
-      "otherEntityRelationshipName": "jobExperience",
-      "relationshipName": "applicant",
-      "otherEntityField": "applicationSerial"
-    }
-  ],
-  "changelogDate": "20200921130457",
-  "entityTableName": "job_experience",
-  "dto": "no",
-  "pagination": "pagination",
-  "service": "serviceClass",
-  "jpaMetamodelFiltering": false,
-  "fluentMethods": true,
-  "readOnly": false,
-  "embedded": false,
-  "clientRootFolder": "",
-  "applications": "*",
-  "enableEntityAudit": true
+    "name": "JobExperience",
+    "fields": [
+        {
+            "fieldName": "organizationName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "designation",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "jobResponsibility",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "fromDate",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "toDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "currentlyWorking",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "applicant",
+            "otherEntityRelationshipName": "jobExperience",
+            "relationshipName": "applicant",
+            "otherEntityField": "applicationSerial"
+        }
+    ],
+    "changelogDate": "20200921130457",
+    "entityTableName": "job_experience",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*",
+    "enableEntityAudit": true
 }

@@ -1,32 +1,34 @@
 {
-  "name": "District",
-  "fields": [
-    {
-      "fieldName": "districtName",
-      "fieldType": "String",
-      "fieldValidateRules": ["required"]
-    }
-  ],
-  "relationships": [
-    {
-      "relationshipType": "many-to-one",
-      "otherEntityName": "division",
-      "otherEntityRelationshipName": "district",
-      "relationshipValidateRules": "required",
-      "relationshipName": "division",
-      "otherEntityField": "divisionName"
-    }
-  ],
-  "changelogDate": "20200921125657",
-  "entityTableName": "mst_district",
-  "dto": "no",
-  "pagination": "infinite-scroll",
-  "service": "serviceClass",
-  "jpaMetamodelFiltering": false,
-  "fluentMethods": true,
-  "readOnly": false,
-  "embedded": false,
-  "clientRootFolder": "",
-  "applications": "*",
-  "enableEntityAudit": true
+    "name": "District",
+    "fields": [
+        {
+            "fieldName": "districtName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "division",
+            "otherEntityRelationshipName": "district",
+            "relationshipValidateRules": "required",
+            "relationshipName": "division",
+            "otherEntityField": "divisionName"
+        }
+    ],
+    "changelogDate": "20200921125657",
+    "entityTableName": "mst_district",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*",
+    "enableEntityAudit": true
 }

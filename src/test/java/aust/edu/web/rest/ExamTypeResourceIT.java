@@ -4,6 +4,8 @@ import aust.edu.PgadmissionApp;
 import aust.edu.domain.ExamType;
 import aust.edu.repository.ExamTypeRepository;
 import aust.edu.service.ExamTypeService;
+import aust.edu.service.dto.ExamTypeCriteria;
+import aust.edu.service.ExamTypeQueryService;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -41,6 +43,9 @@ public class ExamTypeResourceIT {
 
     @Autowired
     private ExamTypeService examTypeService;
+
+    @Autowired
+    private ExamTypeQueryService examTypeQueryService;
 
     @Autowired
     private EntityManager em;
@@ -185,6 +190,217 @@ public class ExamTypeResourceIT {
             .andExpect(jsonPath("$.examTypeCode").value(DEFAULT_EXAM_TYPE_CODE))
             .andExpect(jsonPath("$.examTypeName").value(DEFAULT_EXAM_TYPE_NAME));
     }
+
+
+    @Test
+    @Transactional
+    public void getExamTypesByIdFiltering() throws Exception {
+        // Initialize the database
+        examTypeRepository.saveAndFlush(examType);
+
+        Long id = examType.getId();
+
+        defaultExamTypeShouldBeFound("id.equals=" + id);
+        defaultExamTypeShouldNotBeFound("id.notEquals=" + id);
+
+        defaultExamTypeShouldBeFound("id.greaterThanOrEqual=" + id);
+        defaultExamTypeShouldNotBeFound("id.greaterThan=" + id);
+
+        defaultExamTypeShouldBeFound("id.lessThanOrEqual=" + id);
+        defaultExamTypeShouldNotBeFound("id.lessThan=" + id);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllExamTypesByExamTypeCodeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        examTypeRepository.saveAndFlush(examType);
+
+        // Get all the examTypeList where examTypeCode equals to DEFAULT_EXAM_TYPE_CODE
+        defaultExamTypeShouldBeFound("examTypeCode.equals=" + DEFAULT_EXAM_TYPE_CODE);
+
+        // Get all the examTypeList where examTypeCode equals to UPDATED_EXAM_TYPE_CODE
+        defaultExamTypeShouldNotBeFound("examTypeCode.equals=" + UPDATED_EXAM_TYPE_CODE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllExamTypesByExamTypeCodeIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        examTypeRepository.saveAndFlush(examType);
+
+        // Get all the examTypeList where examTypeCode not equals to DEFAULT_EXAM_TYPE_CODE
+        defaultExamTypeShouldNotBeFound("examTypeCode.notEquals=" + DEFAULT_EXAM_TYPE_CODE);
+
+        // Get all the examTypeList where examTypeCode not equals to UPDATED_EXAM_TYPE_CODE
+        defaultExamTypeShouldBeFound("examTypeCode.notEquals=" + UPDATED_EXAM_TYPE_CODE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllExamTypesByExamTypeCodeIsInShouldWork() throws Exception {
+        // Initialize the database
+        examTypeRepository.saveAndFlush(examType);
+
+        // Get all the examTypeList where examTypeCode in DEFAULT_EXAM_TYPE_CODE or UPDATED_EXAM_TYPE_CODE
+        defaultExamTypeShouldBeFound("examTypeCode.in=" + DEFAULT_EXAM_TYPE_CODE + "," + UPDATED_EXAM_TYPE_CODE);
+
+        // Get all the examTypeList where examTypeCode equals to UPDATED_EXAM_TYPE_CODE
+        defaultExamTypeShouldNotBeFound("examTypeCode.in=" + UPDATED_EXAM_TYPE_CODE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllExamTypesByExamTypeCodeIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        examTypeRepository.saveAndFlush(examType);
+
+        // Get all the examTypeList where examTypeCode is not null
+        defaultExamTypeShouldBeFound("examTypeCode.specified=true");
+
+        // Get all the examTypeList where examTypeCode is null
+        defaultExamTypeShouldNotBeFound("examTypeCode.specified=false");
+    }
+                @Test
+    @Transactional
+    public void getAllExamTypesByExamTypeCodeContainsSomething() throws Exception {
+        // Initialize the database
+        examTypeRepository.saveAndFlush(examType);
+
+        // Get all the examTypeList where examTypeCode contains DEFAULT_EXAM_TYPE_CODE
+        defaultExamTypeShouldBeFound("examTypeCode.contains=" + DEFAULT_EXAM_TYPE_CODE);
+
+        // Get all the examTypeList where examTypeCode contains UPDATED_EXAM_TYPE_CODE
+        defaultExamTypeShouldNotBeFound("examTypeCode.contains=" + UPDATED_EXAM_TYPE_CODE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllExamTypesByExamTypeCodeNotContainsSomething() throws Exception {
+        // Initialize the database
+        examTypeRepository.saveAndFlush(examType);
+
+        // Get all the examTypeList where examTypeCode does not contain DEFAULT_EXAM_TYPE_CODE
+        defaultExamTypeShouldNotBeFound("examTypeCode.doesNotContain=" + DEFAULT_EXAM_TYPE_CODE);
+
+        // Get all the examTypeList where examTypeCode does not contain UPDATED_EXAM_TYPE_CODE
+        defaultExamTypeShouldBeFound("examTypeCode.doesNotContain=" + UPDATED_EXAM_TYPE_CODE);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllExamTypesByExamTypeNameIsEqualToSomething() throws Exception {
+        // Initialize the database
+        examTypeRepository.saveAndFlush(examType);
+
+        // Get all the examTypeList where examTypeName equals to DEFAULT_EXAM_TYPE_NAME
+        defaultExamTypeShouldBeFound("examTypeName.equals=" + DEFAULT_EXAM_TYPE_NAME);
+
+        // Get all the examTypeList where examTypeName equals to UPDATED_EXAM_TYPE_NAME
+        defaultExamTypeShouldNotBeFound("examTypeName.equals=" + UPDATED_EXAM_TYPE_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllExamTypesByExamTypeNameIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        examTypeRepository.saveAndFlush(examType);
+
+        // Get all the examTypeList where examTypeName not equals to DEFAULT_EXAM_TYPE_NAME
+        defaultExamTypeShouldNotBeFound("examTypeName.notEquals=" + DEFAULT_EXAM_TYPE_NAME);
+
+        // Get all the examTypeList where examTypeName not equals to UPDATED_EXAM_TYPE_NAME
+        defaultExamTypeShouldBeFound("examTypeName.notEquals=" + UPDATED_EXAM_TYPE_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllExamTypesByExamTypeNameIsInShouldWork() throws Exception {
+        // Initialize the database
+        examTypeRepository.saveAndFlush(examType);
+
+        // Get all the examTypeList where examTypeName in DEFAULT_EXAM_TYPE_NAME or UPDATED_EXAM_TYPE_NAME
+        defaultExamTypeShouldBeFound("examTypeName.in=" + DEFAULT_EXAM_TYPE_NAME + "," + UPDATED_EXAM_TYPE_NAME);
+
+        // Get all the examTypeList where examTypeName equals to UPDATED_EXAM_TYPE_NAME
+        defaultExamTypeShouldNotBeFound("examTypeName.in=" + UPDATED_EXAM_TYPE_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllExamTypesByExamTypeNameIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        examTypeRepository.saveAndFlush(examType);
+
+        // Get all the examTypeList where examTypeName is not null
+        defaultExamTypeShouldBeFound("examTypeName.specified=true");
+
+        // Get all the examTypeList where examTypeName is null
+        defaultExamTypeShouldNotBeFound("examTypeName.specified=false");
+    }
+                @Test
+    @Transactional
+    public void getAllExamTypesByExamTypeNameContainsSomething() throws Exception {
+        // Initialize the database
+        examTypeRepository.saveAndFlush(examType);
+
+        // Get all the examTypeList where examTypeName contains DEFAULT_EXAM_TYPE_NAME
+        defaultExamTypeShouldBeFound("examTypeName.contains=" + DEFAULT_EXAM_TYPE_NAME);
+
+        // Get all the examTypeList where examTypeName contains UPDATED_EXAM_TYPE_NAME
+        defaultExamTypeShouldNotBeFound("examTypeName.contains=" + UPDATED_EXAM_TYPE_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllExamTypesByExamTypeNameNotContainsSomething() throws Exception {
+        // Initialize the database
+        examTypeRepository.saveAndFlush(examType);
+
+        // Get all the examTypeList where examTypeName does not contain DEFAULT_EXAM_TYPE_NAME
+        defaultExamTypeShouldNotBeFound("examTypeName.doesNotContain=" + DEFAULT_EXAM_TYPE_NAME);
+
+        // Get all the examTypeList where examTypeName does not contain UPDATED_EXAM_TYPE_NAME
+        defaultExamTypeShouldBeFound("examTypeName.doesNotContain=" + UPDATED_EXAM_TYPE_NAME);
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is returned.
+     */
+    private void defaultExamTypeShouldBeFound(String filter) throws Exception {
+        restExamTypeMockMvc.perform(get("/api/exam-types?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(examType.getId().intValue())))
+            .andExpect(jsonPath("$.[*].examTypeCode").value(hasItem(DEFAULT_EXAM_TYPE_CODE)))
+            .andExpect(jsonPath("$.[*].examTypeName").value(hasItem(DEFAULT_EXAM_TYPE_NAME)));
+
+        // Check, that the count call also returns 1
+        restExamTypeMockMvc.perform(get("/api/exam-types/count?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(content().string("1"));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is not returned.
+     */
+    private void defaultExamTypeShouldNotBeFound(String filter) throws Exception {
+        restExamTypeMockMvc.perform(get("/api/exam-types?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(jsonPath("$").isArray())
+            .andExpect(jsonPath("$").isEmpty());
+
+        // Check, that the count call also returns 0
+        restExamTypeMockMvc.perform(get("/api/exam-types/count?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(content().string("0"));
+    }
+
     @Test
     @Transactional
     public void getNonExistingExamType() throws Exception {

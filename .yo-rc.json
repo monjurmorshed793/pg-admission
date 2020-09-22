@@ -35,11 +35,12 @@
     "dtoSuffix": "DTO",
     "otherModules": [],
     "enableTranslation": false,
+    "jpaMetamodelFiltering": true,
     "blueprints": []
   },
   "generator-jhipster-entity-audit": {
     "auditFramework": "custom",
     "auditPage": false,
-    "lastLiquibaseTimestamp": 1600695117000
+    "lastLiquibaseTimestamp": 1600755923000
   }
 }

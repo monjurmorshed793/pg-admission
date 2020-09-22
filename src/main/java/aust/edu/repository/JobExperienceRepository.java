@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface JobExperienceRepository extends JpaRepository<JobExperience, Long> {
+public interface JobExperienceRepository extends JpaRepository<JobExperience, Long>, JpaSpecificationExecutor<JobExperience> {
 }

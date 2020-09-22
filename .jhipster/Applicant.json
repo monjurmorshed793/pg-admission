@@ -1,66 +1,68 @@
 {
-  "name": "Applicant",
-  "fields": [
-    {
-      "fieldName": "applicationSerial",
-      "fieldType": "Integer",
-      "fieldValidateRules": ["required"]
-    },
-    {
-      "fieldName": "status",
-      "fieldType": "ApplicationStatus",
-      "fieldValues": "NOT_APPLIED,APPLIED,CANCELLED,EXPIRED"
-    },
-    {
-      "fieldName": "appliedOn",
-      "fieldType": "Instant"
-    },
-    {
-      "fieldName": "applicationFeePaidOn",
-      "fieldType": "Instant"
-    },
-    {
-      "fieldName": "selectedRejectedOn",
-      "fieldType": "Instant"
-    }
-  ],
-  "relationships": [
-    {
-      "relationshipType": "one-to-many",
-      "otherEntityName": "applicantEducationalInformation",
-      "otherEntityRelationshipName": "applicant",
-      "relationshipName": "applicantEducationalInformation"
-    },
-    {
-      "relationshipType": "one-to-many",
-      "otherEntityName": "jobExperience",
-      "otherEntityRelationshipName": "applicant",
-      "relationshipName": "jobExperience"
-    },
-    {
-      "relationshipType": "one-to-many",
-      "otherEntityName": "applicantAddress",
-      "otherEntityRelationshipName": "applicant",
-      "relationshipName": "applicantAddress"
-    },
-    {
-      "relationshipType": "one-to-one",
-      "otherEntityName": "applicantPersonalInfo",
-      "otherEntityRelationshipName": "applicant",
-      "relationshipName": "applicantPersonalInformation",
-      "ownerSide": false
-    }
-  ],
-  "changelogDate": "20200921125957",
-  "entityTableName": "mst_applicant",
-  "dto": "no",
-  "pagination": "pagination",
-  "service": "serviceClass",
-  "jpaMetamodelFiltering": false,
-  "fluentMethods": true,
-  "readOnly": false,
-  "embedded": false,
-  "clientRootFolder": "",
-  "applications": "*",
-  "enableEntityAudit": true
+    "name": "Applicant",
+    "fields": [
+        {
+            "fieldName": "applicationSerial",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "ApplicationStatus",
+            "fieldValues": "NOT_APPLIED,APPLIED,CANCELLED,EXPIRED"
+        },
+        {
+            "fieldName": "appliedOn",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "applicationFeePaidOn",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "selectedRejectedOn",
+            "fieldType": "Instant"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "applicantEducationalInformation",
+            "otherEntityRelationshipName": "applicant",
+            "relationshipName": "applicantEducationalInformation"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "jobExperience",
+            "otherEntityRelationshipName": "applicant",
+            "relationshipName": "jobExperience"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "applicantAddress",
+            "otherEntityRelationshipName": "applicant",
+            "relationshipName": "applicantAddress"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "applicantPersonalInfo",
+            "otherEntityRelationshipName": "applicant",
+            "relationshipName": "applicantPersonalInformation",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20200921125957",
+    "entityTableName": "mst_applicant",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*",
+    "enableEntityAudit": true
 }

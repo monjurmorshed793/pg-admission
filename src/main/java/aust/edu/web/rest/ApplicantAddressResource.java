@@ -3,6 +3,8 @@ package aust.edu.web.rest;
 import aust.edu.domain.ApplicantAddress;
 import aust.edu.service.ApplicantAddressService;
 import aust.edu.web.rest.errors.BadRequestAlertException;
+import aust.edu.service.dto.ApplicantAddressCriteria;
+import aust.edu.service.ApplicantAddressQueryService;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
@@ -40,8 +42,11 @@ public class ApplicantAddressResource {
 
     private final ApplicantAddressService applicantAddressService;
 
-    public ApplicantAddressResource(ApplicantAddressService applicantAddressService) {
+    private final ApplicantAddressQueryService applicantAddressQueryService;
+
+    public ApplicantAddressResource(ApplicantAddressService applicantAddressService, ApplicantAddressQueryService applicantAddressQueryService) {
         this.applicantAddressService = applicantAddressService;
+        this.applicantAddressQueryService = applicantAddressQueryService;
     }
 
     /**
@@ -88,14 +93,27 @@ public class ApplicantAddressResource {
      * {@code GET  /applicant-addresses} : get all the applicantAddresses.
      *
      * @param pageable the pagination information.
+     * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of applicantAddresses in body.
      */
     @GetMapping("/applicant-addresses")
-    public ResponseEntity<List<ApplicantAddress>> getAllApplicantAddresses(Pageable pageable) {
-        log.debug("REST request to get a page of ApplicantAddresses");
-        Page<ApplicantAddress> page = applicantAddressService.findAll(pageable);
+    public ResponseEntity<List<ApplicantAddress>> getAllApplicantAddresses(ApplicantAddressCriteria criteria, Pageable pageable) {
+        log.debug("REST request to get ApplicantAddresses by criteria: {}", criteria);
+        Page<ApplicantAddress> page = applicantAddressQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+     * {@code GET  /applicant-addresses/count} : count all the applicantAddresses.
+     *
+     * @param criteria the criteria which the requested entities should match.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+     */
+    @GetMapping("/applicant-addresses/count")
+    public ResponseEntity<Long> countApplicantAddresses(ApplicantAddressCriteria criteria) {
+        log.debug("REST request to count ApplicantAddresses by criteria: {}", criteria);
+        return ResponseEntity.ok().body(applicantAddressQueryService.countByCriteria(criteria));
     }
 
     /**

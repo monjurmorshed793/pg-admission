@@ -30,7 +30,7 @@
     </changeSet>
     
     <!-- Added the entity audit columns -->
-    <changeSet id="20200921133157-audit-1" author="jhipster-entity-audit">
+    <changeSet id="20200921130257-audit-1" author="jhipster-entity-audit">
         <addColumn tableName="mst_exam_type">
             <column name="created_by" type="varchar(50)" defaultValue="system">
                 <constraints nullable="false"/>

@@ -134,3 +134,4 @@ relationship ManyToOne{
 paginate Semester, Division, District, Thana, Program, ApplicationDeadline, ExamType with infinite-scroll
 paginate Applicant, ApplicantPersonalInfo, ApplicantAddress, ApplicantEducationalInformation, JobExperience with pagination
 service * with serviceClass
+filter *

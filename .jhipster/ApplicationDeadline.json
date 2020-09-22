@@ -1,45 +1,49 @@
 {
-  "name": "ApplicationDeadline",
-  "fields": [
-    {
-      "fieldName": "fromDate",
-      "fieldType": "Instant",
-      "fieldValidateRules": ["required"]
-    },
-    {
-      "fieldName": "toDate",
-      "fieldType": "Instant",
-      "fieldValidateRules": ["required"]
-    }
-  ],
-  "relationships": [
-    {
-      "relationshipType": "many-to-one",
-      "otherEntityName": "semester",
-      "otherEntityRelationshipName": "applicationDeadline",
-      "relationshipValidateRules": "required",
-      "relationshipName": "semester",
-      "otherEntityField": "semesterName"
-    },
-    {
-      "relationshipType": "many-to-one",
-      "otherEntityName": "program",
-      "otherEntityRelationshipName": "applicationDeadline",
-      "relationshipValidateRules": "required",
-      "relationshipName": "program",
-      "otherEntityField": "programNameShort"
-    }
-  ],
-  "changelogDate": "20200921125857",
-  "entityTableName": "app_deadlines",
-  "dto": "no",
-  "pagination": "infinite-scroll",
-  "service": "serviceClass",
-  "jpaMetamodelFiltering": false,
-  "fluentMethods": true,
-  "readOnly": false,
-  "embedded": false,
-  "clientRootFolder": "",
-  "applications": "*",
-  "enableEntityAudit": true
+    "name": "ApplicationDeadline",
+    "fields": [
+        {
+            "fieldName": "fromDate",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "toDate",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "semester",
+            "otherEntityRelationshipName": "applicationDeadline",
+            "relationshipValidateRules": "required",
+            "relationshipName": "semester",
+            "otherEntityField": "semesterName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "program",
+            "otherEntityRelationshipName": "applicationDeadline",
+            "relationshipValidateRules": "required",
+            "relationshipName": "program",
+            "otherEntityField": "programNameShort"
+        }
+    ],
+    "changelogDate": "20200921125857",
+    "entityTableName": "app_deadlines",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*",
+    "enableEntityAudit": true
 }

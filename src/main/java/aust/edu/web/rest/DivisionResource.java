@@ -3,6 +3,8 @@ package aust.edu.web.rest;
 import aust.edu.domain.Division;
 import aust.edu.service.DivisionService;
 import aust.edu.web.rest.errors.BadRequestAlertException;
+import aust.edu.service.dto.DivisionCriteria;
+import aust.edu.service.DivisionQueryService;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
@@ -40,8 +42,11 @@ public class DivisionResource {
 
     private final DivisionService divisionService;
 
-    public DivisionResource(DivisionService divisionService) {
+    private final DivisionQueryService divisionQueryService;
+
+    public DivisionResource(DivisionService divisionService, DivisionQueryService divisionQueryService) {
         this.divisionService = divisionService;
+        this.divisionQueryService = divisionQueryService;
     }
 
     /**
@@ -88,14 +93,27 @@ public class DivisionResource {
      * {@code GET  /divisions} : get all the divisions.
      *
      * @param pageable the pagination information.
+     * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of divisions in body.
      */
     @GetMapping("/divisions")
-    public ResponseEntity<List<Division>> getAllDivisions(Pageable pageable) {
-        log.debug("REST request to get a page of Divisions");
-        Page<Division> page = divisionService.findAll(pageable);
+    public ResponseEntity<List<Division>> getAllDivisions(DivisionCriteria criteria, Pageable pageable) {
+        log.debug("REST request to get Divisions by criteria: {}", criteria);
+        Page<Division> page = divisionQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+     * {@code GET  /divisions/count} : count all the divisions.
+     *
+     * @param criteria the criteria which the requested entities should match.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+     */
+    @GetMapping("/divisions/count")
+    public ResponseEntity<Long> countDivisions(DivisionCriteria criteria) {
+        log.debug("REST request to count Divisions by criteria: {}", criteria);
+        return ResponseEntity.ok().body(divisionQueryService.countByCriteria(criteria));
     }
 
     /**
