@@ -13,18 +13,20 @@ import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ErrorComponent } from './layouts/error/error.component';
+import { NavbarExtComponent } from './layouts/navbar-ext/navbar-ext.component';
+import { PgadmissionExtHomeModule } from 'app/home-ext/home-ext.module';
 
 @NgModule({
   imports: [
     BrowserModule,
     PgadmissionSharedModule,
     PgadmissionCoreModule,
-    PgadmissionHomeModule,
+    PgadmissionExtHomeModule,
     // jhipster-needle-angular-add-module JHipster will add new module here
     PgadmissionEntityModule,
     PgadmissionAppRoutingModule,
   ],
-  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent],
+  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent, NavbarExtComponent],
   bootstrap: [MainComponent],
 })
 export class PgadmissionAppModule {}

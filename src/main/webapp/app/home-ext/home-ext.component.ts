@@ -12,7 +12,7 @@ import { HomeComponent } from 'app/home/home.component';
   styleUrls: ['./home-ext.scss'],
 })
 export class HomeExtComponent extends HomeComponent implements OnInit, OnDestroy {
-  constructor(protected accountService: AccountService, protected loginModalService: LoginModalService) {
+  constructor(accountService: AccountService, loginModalService: LoginModalService) {
     super(accountService, loginModalService);
   }
 }
