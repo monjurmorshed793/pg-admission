@@ -1,15 +1,11 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
-import { HomeExtComponent } from './home-ext.component';
-import { PgadmissionSharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
-import { HOME_ROUTE } from '../home/home.route';
-import { HomeComponent } from '../home/home.component';
-import { HOME_EXT_ROUTE } from './home-ext.route';
+
+import { PgadmissionSharedModule } from 'app/shared/shared.module';
+import { HomeExtComponent } from './home-ext.component';
 
 @NgModule({
-  imports: [PgadmissionSharedModule, RouterModule.forChild([HOME_EXT_ROUTE])],
+  imports: [PgadmissionSharedModule],
   declarations: [HomeExtComponent],
 })
-export class PgAdmissionHomeExtModule {}
+export class PgadmissionExtHomeModule {}

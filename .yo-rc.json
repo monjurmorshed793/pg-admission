@@ -35,7 +35,6 @@
     "dtoSuffix": "DTO",
     "otherModules": [],
     "enableTranslation": false,
-    "jpaMetamodelFiltering": true,
     "blueprints": []
   },
   "generator-jhipster-entity-audit": {
