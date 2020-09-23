@@ -3,8 +3,6 @@ package aust.edu.web.rest;
 import aust.edu.domain.Semester;
 import aust.edu.service.SemesterService;
 import aust.edu.web.rest.errors.BadRequestAlertException;
-import aust.edu.service.dto.SemesterCriteria;
-import aust.edu.service.SemesterQueryService;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
@@ -42,11 +40,8 @@ public class SemesterResource {
 
     private final SemesterService semesterService;
 
-    private final SemesterQueryService semesterQueryService;
-
-    public SemesterResource(SemesterService semesterService, SemesterQueryService semesterQueryService) {
+    public SemesterResource(SemesterService semesterService) {
         this.semesterService = semesterService;
-        this.semesterQueryService = semesterQueryService;
     }
 
     /**
@@ -93,27 +88,14 @@ public class SemesterResource {
      * {@code GET  /semesters} : get all the semesters.
      *
      * @param pageable the pagination information.
-     * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of semesters in body.
      */
     @GetMapping("/semesters")
-    public ResponseEntity<List<Semester>> getAllSemesters(SemesterCriteria criteria, Pageable pageable) {
-        log.debug("REST request to get Semesters by criteria: {}", criteria);
-        Page<Semester> page = semesterQueryService.findByCriteria(criteria, pageable);
+    public ResponseEntity<List<Semester>> getAllSemesters(Pageable pageable) {
+        log.debug("REST request to get a page of Semesters");
+        Page<Semester> page = semesterService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
-    }
-
-    /**
-     * {@code GET  /semesters/count} : count all the semesters.
-     *
-     * @param criteria the criteria which the requested entities should match.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
-     */
-    @GetMapping("/semesters/count")
-    public ResponseEntity<Long> countSemesters(SemesterCriteria criteria) {
-        log.debug("REST request to count Semesters by criteria: {}", criteria);
-        return ResponseEntity.ok().body(semesterQueryService.countByCriteria(criteria));
     }
 
     /**

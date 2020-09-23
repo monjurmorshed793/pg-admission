@@ -3,8 +3,6 @@ package aust.edu.web.rest;
 import aust.edu.domain.Thana;
 import aust.edu.service.ThanaService;
 import aust.edu.web.rest.errors.BadRequestAlertException;
-import aust.edu.service.dto.ThanaCriteria;
-import aust.edu.service.ThanaQueryService;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
@@ -42,11 +40,8 @@ public class ThanaResource {
 
     private final ThanaService thanaService;
 
-    private final ThanaQueryService thanaQueryService;
-
-    public ThanaResource(ThanaService thanaService, ThanaQueryService thanaQueryService) {
+    public ThanaResource(ThanaService thanaService) {
         this.thanaService = thanaService;
-        this.thanaQueryService = thanaQueryService;
     }
 
     /**
@@ -93,27 +88,14 @@ public class ThanaResource {
      * {@code GET  /thanas} : get all the thanas.
      *
      * @param pageable the pagination information.
-     * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of thanas in body.
      */
     @GetMapping("/thanas")
-    public ResponseEntity<List<Thana>> getAllThanas(ThanaCriteria criteria, Pageable pageable) {
-        log.debug("REST request to get Thanas by criteria: {}", criteria);
-        Page<Thana> page = thanaQueryService.findByCriteria(criteria, pageable);
+    public ResponseEntity<List<Thana>> getAllThanas(Pageable pageable) {
+        log.debug("REST request to get a page of Thanas");
+        Page<Thana> page = thanaService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
-    }
-
-    /**
-     * {@code GET  /thanas/count} : count all the thanas.
-     *
-     * @param criteria the criteria which the requested entities should match.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
-     */
-    @GetMapping("/thanas/count")
-    public ResponseEntity<Long> countThanas(ThanaCriteria criteria) {
-        log.debug("REST request to count Thanas by criteria: {}", criteria);
-        return ResponseEntity.ok().body(thanaQueryService.countByCriteria(criteria));
     }
 
     /**

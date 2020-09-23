@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface ThanaRepository extends JpaRepository<Thana, Long>, JpaSpecificationExecutor<Thana> {
+public interface ThanaRepository extends JpaRepository<Thana, Long> {
 }

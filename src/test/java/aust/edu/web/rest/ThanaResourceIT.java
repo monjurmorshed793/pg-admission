@@ -5,8 +5,6 @@ import aust.edu.domain.Thana;
 import aust.edu.domain.District;
 import aust.edu.repository.ThanaRepository;
 import aust.edu.service.ThanaService;
-import aust.edu.service.dto.ThanaCriteria;
-import aust.edu.service.ThanaQueryService;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -41,9 +39,6 @@ public class ThanaResourceIT {
 
     @Autowired
     private ThanaService thanaService;
-
-    @Autowired
-    private ThanaQueryService thanaQueryService;
 
     @Autowired
     private EntityManager em;
@@ -184,154 +179,6 @@ public class ThanaResourceIT {
             .andExpect(jsonPath("$.id").value(thana.getId().intValue()))
             .andExpect(jsonPath("$.thanaName").value(DEFAULT_THANA_NAME));
     }
-
-
-    @Test
-    @Transactional
-    public void getThanasByIdFiltering() throws Exception {
-        // Initialize the database
-        thanaRepository.saveAndFlush(thana);
-
-        Long id = thana.getId();
-
-        defaultThanaShouldBeFound("id.equals=" + id);
-        defaultThanaShouldNotBeFound("id.notEquals=" + id);
-
-        defaultThanaShouldBeFound("id.greaterThanOrEqual=" + id);
-        defaultThanaShouldNotBeFound("id.greaterThan=" + id);
-
-        defaultThanaShouldBeFound("id.lessThanOrEqual=" + id);
-        defaultThanaShouldNotBeFound("id.lessThan=" + id);
-    }
-
-
-    @Test
-    @Transactional
-    public void getAllThanasByThanaNameIsEqualToSomething() throws Exception {
-        // Initialize the database
-        thanaRepository.saveAndFlush(thana);
-
-        // Get all the thanaList where thanaName equals to DEFAULT_THANA_NAME
-        defaultThanaShouldBeFound("thanaName.equals=" + DEFAULT_THANA_NAME);
-
-        // Get all the thanaList where thanaName equals to UPDATED_THANA_NAME
-        defaultThanaShouldNotBeFound("thanaName.equals=" + UPDATED_THANA_NAME);
-    }
-
-    @Test
-    @Transactional
-    public void getAllThanasByThanaNameIsNotEqualToSomething() throws Exception {
-        // Initialize the database
-        thanaRepository.saveAndFlush(thana);
-
-        // Get all the thanaList where thanaName not equals to DEFAULT_THANA_NAME
-        defaultThanaShouldNotBeFound("thanaName.notEquals=" + DEFAULT_THANA_NAME);
-
-        // Get all the thanaList where thanaName not equals to UPDATED_THANA_NAME
-        defaultThanaShouldBeFound("thanaName.notEquals=" + UPDATED_THANA_NAME);
-    }
-
-    @Test
-    @Transactional
-    public void getAllThanasByThanaNameIsInShouldWork() throws Exception {
-        // Initialize the database
-        thanaRepository.saveAndFlush(thana);
-
-        // Get all the thanaList where thanaName in DEFAULT_THANA_NAME or UPDATED_THANA_NAME
-        defaultThanaShouldBeFound("thanaName.in=" + DEFAULT_THANA_NAME + "," + UPDATED_THANA_NAME);
-
-        // Get all the thanaList where thanaName equals to UPDATED_THANA_NAME
-        defaultThanaShouldNotBeFound("thanaName.in=" + UPDATED_THANA_NAME);
-    }
-
-    @Test
-    @Transactional
-    public void getAllThanasByThanaNameIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        thanaRepository.saveAndFlush(thana);
-
-        // Get all the thanaList where thanaName is not null
-        defaultThanaShouldBeFound("thanaName.specified=true");
-
-        // Get all the thanaList where thanaName is null
-        defaultThanaShouldNotBeFound("thanaName.specified=false");
-    }
-                @Test
-    @Transactional
-    public void getAllThanasByThanaNameContainsSomething() throws Exception {
-        // Initialize the database
-        thanaRepository.saveAndFlush(thana);
-
-        // Get all the thanaList where thanaName contains DEFAULT_THANA_NAME
-        defaultThanaShouldBeFound("thanaName.contains=" + DEFAULT_THANA_NAME);
-
-        // Get all the thanaList where thanaName contains UPDATED_THANA_NAME
-        defaultThanaShouldNotBeFound("thanaName.contains=" + UPDATED_THANA_NAME);
-    }
-
-    @Test
-    @Transactional
-    public void getAllThanasByThanaNameNotContainsSomething() throws Exception {
-        // Initialize the database
-        thanaRepository.saveAndFlush(thana);
-
-        // Get all the thanaList where thanaName does not contain DEFAULT_THANA_NAME
-        defaultThanaShouldNotBeFound("thanaName.doesNotContain=" + DEFAULT_THANA_NAME);
-
-        // Get all the thanaList where thanaName does not contain UPDATED_THANA_NAME
-        defaultThanaShouldBeFound("thanaName.doesNotContain=" + UPDATED_THANA_NAME);
-    }
-
-
-    @Test
-    @Transactional
-    public void getAllThanasByDistrictIsEqualToSomething() throws Exception {
-        // Get already existing entity
-        District district = thana.getDistrict();
-        thanaRepository.saveAndFlush(thana);
-        Long districtId = district.getId();
-
-        // Get all the thanaList where district equals to districtId
-        defaultThanaShouldBeFound("districtId.equals=" + districtId);
-
-        // Get all the thanaList where district equals to districtId + 1
-        defaultThanaShouldNotBeFound("districtId.equals=" + (districtId + 1));
-    }
-
-    /**
-     * Executes the search, and checks that the default entity is returned.
-     */
-    private void defaultThanaShouldBeFound(String filter) throws Exception {
-        restThanaMockMvc.perform(get("/api/thanas?sort=id,desc&" + filter))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(thana.getId().intValue())))
-            .andExpect(jsonPath("$.[*].thanaName").value(hasItem(DEFAULT_THANA_NAME)));
-
-        // Check, that the count call also returns 1
-        restThanaMockMvc.perform(get("/api/thanas/count?sort=id,desc&" + filter))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(content().string("1"));
-    }
-
-    /**
-     * Executes the search, and checks that the default entity is not returned.
-     */
-    private void defaultThanaShouldNotBeFound(String filter) throws Exception {
-        restThanaMockMvc.perform(get("/api/thanas?sort=id,desc&" + filter))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$").isArray())
-            .andExpect(jsonPath("$").isEmpty());
-
-        // Check, that the count call also returns 0
-        restThanaMockMvc.perform(get("/api/thanas/count?sort=id,desc&" + filter))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(content().string("0"));
-    }
-
     @Test
     @Transactional
     public void getNonExistingThana() throws Exception {

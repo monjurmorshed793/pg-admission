@@ -3,8 +3,6 @@ package aust.edu.web.rest;
 import aust.edu.domain.ExamType;
 import aust.edu.service.ExamTypeService;
 import aust.edu.web.rest.errors.BadRequestAlertException;
-import aust.edu.service.dto.ExamTypeCriteria;
-import aust.edu.service.ExamTypeQueryService;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
@@ -42,11 +40,8 @@ public class ExamTypeResource {
 
     private final ExamTypeService examTypeService;
 
-    private final ExamTypeQueryService examTypeQueryService;
-
-    public ExamTypeResource(ExamTypeService examTypeService, ExamTypeQueryService examTypeQueryService) {
+    public ExamTypeResource(ExamTypeService examTypeService) {
         this.examTypeService = examTypeService;
-        this.examTypeQueryService = examTypeQueryService;
     }
 
     /**
@@ -93,27 +88,14 @@ public class ExamTypeResource {
      * {@code GET  /exam-types} : get all the examTypes.
      *
      * @param pageable the pagination information.
-     * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of examTypes in body.
      */
     @GetMapping("/exam-types")
-    public ResponseEntity<List<ExamType>> getAllExamTypes(ExamTypeCriteria criteria, Pageable pageable) {
-        log.debug("REST request to get ExamTypes by criteria: {}", criteria);
-        Page<ExamType> page = examTypeQueryService.findByCriteria(criteria, pageable);
+    public ResponseEntity<List<ExamType>> getAllExamTypes(Pageable pageable) {
+        log.debug("REST request to get a page of ExamTypes");
+        Page<ExamType> page = examTypeService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
-    }
-
-    /**
-     * {@code GET  /exam-types/count} : count all the examTypes.
-     *
-     * @param criteria the criteria which the requested entities should match.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
-     */
-    @GetMapping("/exam-types/count")
-    public ResponseEntity<Long> countExamTypes(ExamTypeCriteria criteria) {
-        log.debug("REST request to count ExamTypes by criteria: {}", criteria);
-        return ResponseEntity.ok().body(examTypeQueryService.countByCriteria(criteria));
     }
 
     /**

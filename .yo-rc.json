@@ -40,6 +40,6 @@
   "generator-jhipster-entity-audit": {
     "auditFramework": "custom",
     "auditPage": false,
-    "lastLiquibaseTimestamp": 1600793609000
+    "lastLiquibaseTimestamp": 1600875209000
   }
 }

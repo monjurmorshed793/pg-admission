@@ -24,7 +24,7 @@
     "dto": "no",
     "pagination": "infinite-scroll",
     "service": "serviceClass",
-    "jpaMetamodelFiltering": true,
+    "jpaMetamodelFiltering": false,
     "fluentMethods": true,
     "readOnly": false,
     "embedded": false,

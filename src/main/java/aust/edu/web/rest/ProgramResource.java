@@ -3,8 +3,6 @@ package aust.edu.web.rest;
 import aust.edu.domain.Program;
 import aust.edu.service.ProgramService;
 import aust.edu.web.rest.errors.BadRequestAlertException;
-import aust.edu.service.dto.ProgramCriteria;
-import aust.edu.service.ProgramQueryService;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
@@ -42,11 +40,8 @@ public class ProgramResource {
 
     private final ProgramService programService;
 
-    private final ProgramQueryService programQueryService;
-
-    public ProgramResource(ProgramService programService, ProgramQueryService programQueryService) {
+    public ProgramResource(ProgramService programService) {
         this.programService = programService;
-        this.programQueryService = programQueryService;
     }
 
     /**
@@ -93,27 +88,14 @@ public class ProgramResource {
      * {@code GET  /programs} : get all the programs.
      *
      * @param pageable the pagination information.
-     * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of programs in body.
      */
     @GetMapping("/programs")
-    public ResponseEntity<List<Program>> getAllPrograms(ProgramCriteria criteria, Pageable pageable) {
-        log.debug("REST request to get Programs by criteria: {}", criteria);
-        Page<Program> page = programQueryService.findByCriteria(criteria, pageable);
+    public ResponseEntity<List<Program>> getAllPrograms(Pageable pageable) {
+        log.debug("REST request to get a page of Programs");
+        Page<Program> page = programService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
-    }
-
-    /**
-     * {@code GET  /programs/count} : count all the programs.
-     *
-     * @param criteria the criteria which the requested entities should match.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
-     */
-    @GetMapping("/programs/count")
-    public ResponseEntity<Long> countPrograms(ProgramCriteria criteria) {
-        log.debug("REST request to count Programs by criteria: {}", criteria);
-        return ResponseEntity.ok().body(programQueryService.countByCriteria(criteria));
     }
 
     /**

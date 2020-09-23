@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface DivisionRepository extends JpaRepository<Division, Long>, JpaSpecificationExecutor<Division> {
+public interface DivisionRepository extends JpaRepository<Division, Long> {
 }

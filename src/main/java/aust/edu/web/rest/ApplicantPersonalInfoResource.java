@@ -3,8 +3,6 @@ package aust.edu.web.rest;
 import aust.edu.domain.ApplicantPersonalInfo;
 import aust.edu.service.ApplicantPersonalInfoService;
 import aust.edu.web.rest.errors.BadRequestAlertException;
-import aust.edu.service.dto.ApplicantPersonalInfoCriteria;
-import aust.edu.service.ApplicantPersonalInfoQueryService;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
@@ -42,11 +40,8 @@ public class ApplicantPersonalInfoResource {
 
     private final ApplicantPersonalInfoService applicantPersonalInfoService;
 
-    private final ApplicantPersonalInfoQueryService applicantPersonalInfoQueryService;
-
-    public ApplicantPersonalInfoResource(ApplicantPersonalInfoService applicantPersonalInfoService, ApplicantPersonalInfoQueryService applicantPersonalInfoQueryService) {
+    public ApplicantPersonalInfoResource(ApplicantPersonalInfoService applicantPersonalInfoService) {
         this.applicantPersonalInfoService = applicantPersonalInfoService;
-        this.applicantPersonalInfoQueryService = applicantPersonalInfoQueryService;
     }
 
     /**
@@ -93,27 +88,14 @@ public class ApplicantPersonalInfoResource {
      * {@code GET  /applicant-personal-infos} : get all the applicantPersonalInfos.
      *
      * @param pageable the pagination information.
-     * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of applicantPersonalInfos in body.
      */
     @GetMapping("/applicant-personal-infos")
-    public ResponseEntity<List<ApplicantPersonalInfo>> getAllApplicantPersonalInfos(ApplicantPersonalInfoCriteria criteria, Pageable pageable) {
-        log.debug("REST request to get ApplicantPersonalInfos by criteria: {}", criteria);
-        Page<ApplicantPersonalInfo> page = applicantPersonalInfoQueryService.findByCriteria(criteria, pageable);
+    public ResponseEntity<List<ApplicantPersonalInfo>> getAllApplicantPersonalInfos(Pageable pageable) {
+        log.debug("REST request to get a page of ApplicantPersonalInfos");
+        Page<ApplicantPersonalInfo> page = applicantPersonalInfoService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
-    }
-
-    /**
-     * {@code GET  /applicant-personal-infos/count} : count all the applicantPersonalInfos.
-     *
-     * @param criteria the criteria which the requested entities should match.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
-     */
-    @GetMapping("/applicant-personal-infos/count")
-    public ResponseEntity<Long> countApplicantPersonalInfos(ApplicantPersonalInfoCriteria criteria) {
-        log.debug("REST request to count ApplicantPersonalInfos by criteria: {}", criteria);
-        return ResponseEntity.ok().body(applicantPersonalInfoQueryService.countByCriteria(criteria));
     }
 
     /**

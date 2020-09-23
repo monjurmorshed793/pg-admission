@@ -53,7 +53,7 @@
     "dto": "no",
     "pagination": "pagination",
     "service": "serviceClass",
-    "jpaMetamodelFiltering": true,
+    "jpaMetamodelFiltering": false,
     "fluentMethods": true,
     "readOnly": false,
     "embedded": false,

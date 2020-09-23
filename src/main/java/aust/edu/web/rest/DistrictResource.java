@@ -3,8 +3,6 @@ package aust.edu.web.rest;
 import aust.edu.domain.District;
 import aust.edu.service.DistrictService;
 import aust.edu.web.rest.errors.BadRequestAlertException;
-import aust.edu.service.dto.DistrictCriteria;
-import aust.edu.service.DistrictQueryService;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
@@ -42,11 +40,8 @@ public class DistrictResource {
 
     private final DistrictService districtService;
 
-    private final DistrictQueryService districtQueryService;
-
-    public DistrictResource(DistrictService districtService, DistrictQueryService districtQueryService) {
+    public DistrictResource(DistrictService districtService) {
         this.districtService = districtService;
-        this.districtQueryService = districtQueryService;
     }
 
     /**
@@ -93,27 +88,14 @@ public class DistrictResource {
      * {@code GET  /districts} : get all the districts.
      *
      * @param pageable the pagination information.
-     * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of districts in body.
      */
     @GetMapping("/districts")
-    public ResponseEntity<List<District>> getAllDistricts(DistrictCriteria criteria, Pageable pageable) {
-        log.debug("REST request to get Districts by criteria: {}", criteria);
-        Page<District> page = districtQueryService.findByCriteria(criteria, pageable);
+    public ResponseEntity<List<District>> getAllDistricts(Pageable pageable) {
+        log.debug("REST request to get a page of Districts");
+        Page<District> page = districtService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
-    }
-
-    /**
-     * {@code GET  /districts/count} : count all the districts.
-     *
-     * @param criteria the criteria which the requested entities should match.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
-     */
-    @GetMapping("/districts/count")
-    public ResponseEntity<Long> countDistricts(DistrictCriteria criteria) {
-        log.debug("REST request to count Districts by criteria: {}", criteria);
-        return ResponseEntity.ok().body(districtQueryService.countByCriteria(criteria));
     }
 
     /**

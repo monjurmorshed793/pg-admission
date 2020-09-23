@@ -3,8 +3,6 @@ package aust.edu.web.rest;
 import aust.edu.domain.JobExperience;
 import aust.edu.service.JobExperienceService;
 import aust.edu.web.rest.errors.BadRequestAlertException;
-import aust.edu.service.dto.JobExperienceCriteria;
-import aust.edu.service.JobExperienceQueryService;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
@@ -42,11 +40,8 @@ public class JobExperienceResource {
 
     private final JobExperienceService jobExperienceService;
 
-    private final JobExperienceQueryService jobExperienceQueryService;
-
-    public JobExperienceResource(JobExperienceService jobExperienceService, JobExperienceQueryService jobExperienceQueryService) {
+    public JobExperienceResource(JobExperienceService jobExperienceService) {
         this.jobExperienceService = jobExperienceService;
-        this.jobExperienceQueryService = jobExperienceQueryService;
     }
 
     /**
@@ -93,27 +88,14 @@ public class JobExperienceResource {
      * {@code GET  /job-experiences} : get all the jobExperiences.
      *
      * @param pageable the pagination information.
-     * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of jobExperiences in body.
      */
     @GetMapping("/job-experiences")
-    public ResponseEntity<List<JobExperience>> getAllJobExperiences(JobExperienceCriteria criteria, Pageable pageable) {
-        log.debug("REST request to get JobExperiences by criteria: {}", criteria);
-        Page<JobExperience> page = jobExperienceQueryService.findByCriteria(criteria, pageable);
+    public ResponseEntity<List<JobExperience>> getAllJobExperiences(Pageable pageable) {
+        log.debug("REST request to get a page of JobExperiences");
+        Page<JobExperience> page = jobExperienceService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
-    }
-
-    /**
-     * {@code GET  /job-experiences/count} : count all the jobExperiences.
-     *
-     * @param criteria the criteria which the requested entities should match.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
-     */
-    @GetMapping("/job-experiences/count")
-    public ResponseEntity<Long> countJobExperiences(JobExperienceCriteria criteria) {
-        log.debug("REST request to count JobExperiences by criteria: {}", criteria);
-        return ResponseEntity.ok().body(jobExperienceQueryService.countByCriteria(criteria));
     }
 
     /**

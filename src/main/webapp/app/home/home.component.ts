@@ -8,13 +8,13 @@ import { Account } from 'app/core/user/account.model';
 @Component({
   selector: 'pg-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.scss'],
+  styleUrls: ['home.scss'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
   account: Account | null = null;
   authSubscription?: Subscription;
 
-  constructor(protected accountService: AccountService, protected loginModalService: LoginModalService) {}
+  constructor(private accountService: AccountService, private loginModalService: LoginModalService) {}
 
   ngOnInit(): void {
     this.authSubscription = this.accountService.getAuthenticationState().subscribe(account => (this.account = account));

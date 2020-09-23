@@ -5,8 +5,6 @@ import aust.edu.domain.District;
 import aust.edu.domain.Division;
 import aust.edu.repository.DistrictRepository;
 import aust.edu.service.DistrictService;
-import aust.edu.service.dto.DistrictCriteria;
-import aust.edu.service.DistrictQueryService;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -41,9 +39,6 @@ public class DistrictResourceIT {
 
     @Autowired
     private DistrictService districtService;
-
-    @Autowired
-    private DistrictQueryService districtQueryService;
 
     @Autowired
     private EntityManager em;
@@ -184,154 +179,6 @@ public class DistrictResourceIT {
             .andExpect(jsonPath("$.id").value(district.getId().intValue()))
             .andExpect(jsonPath("$.districtName").value(DEFAULT_DISTRICT_NAME));
     }
-
-
-    @Test
-    @Transactional
-    public void getDistrictsByIdFiltering() throws Exception {
-        // Initialize the database
-        districtRepository.saveAndFlush(district);
-
-        Long id = district.getId();
-
-        defaultDistrictShouldBeFound("id.equals=" + id);
-        defaultDistrictShouldNotBeFound("id.notEquals=" + id);
-
-        defaultDistrictShouldBeFound("id.greaterThanOrEqual=" + id);
-        defaultDistrictShouldNotBeFound("id.greaterThan=" + id);
-
-        defaultDistrictShouldBeFound("id.lessThanOrEqual=" + id);
-        defaultDistrictShouldNotBeFound("id.lessThan=" + id);
-    }
-
-
-    @Test
-    @Transactional
-    public void getAllDistrictsByDistrictNameIsEqualToSomething() throws Exception {
-        // Initialize the database
-        districtRepository.saveAndFlush(district);
-
-        // Get all the districtList where districtName equals to DEFAULT_DISTRICT_NAME
-        defaultDistrictShouldBeFound("districtName.equals=" + DEFAULT_DISTRICT_NAME);
-
-        // Get all the districtList where districtName equals to UPDATED_DISTRICT_NAME
-        defaultDistrictShouldNotBeFound("districtName.equals=" + UPDATED_DISTRICT_NAME);
-    }
-
-    @Test
-    @Transactional
-    public void getAllDistrictsByDistrictNameIsNotEqualToSomething() throws Exception {
-        // Initialize the database
-        districtRepository.saveAndFlush(district);
-
-        // Get all the districtList where districtName not equals to DEFAULT_DISTRICT_NAME
-        defaultDistrictShouldNotBeFound("districtName.notEquals=" + DEFAULT_DISTRICT_NAME);
-
-        // Get all the districtList where districtName not equals to UPDATED_DISTRICT_NAME
-        defaultDistrictShouldBeFound("districtName.notEquals=" + UPDATED_DISTRICT_NAME);
-    }
-
-    @Test
-    @Transactional
-    public void getAllDistrictsByDistrictNameIsInShouldWork() throws Exception {
-        // Initialize the database
-        districtRepository.saveAndFlush(district);
-
-        // Get all the districtList where districtName in DEFAULT_DISTRICT_NAME or UPDATED_DISTRICT_NAME
-        defaultDistrictShouldBeFound("districtName.in=" + DEFAULT_DISTRICT_NAME + "," + UPDATED_DISTRICT_NAME);
-
-        // Get all the districtList where districtName equals to UPDATED_DISTRICT_NAME
-        defaultDistrictShouldNotBeFound("districtName.in=" + UPDATED_DISTRICT_NAME);
-    }
-
-    @Test
-    @Transactional
-    public void getAllDistrictsByDistrictNameIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        districtRepository.saveAndFlush(district);
-
-        // Get all the districtList where districtName is not null
-        defaultDistrictShouldBeFound("districtName.specified=true");
-
-        // Get all the districtList where districtName is null
-        defaultDistrictShouldNotBeFound("districtName.specified=false");
-    }
-                @Test
-    @Transactional
-    public void getAllDistrictsByDistrictNameContainsSomething() throws Exception {
-        // Initialize the database
-        districtRepository.saveAndFlush(district);
-
-        // Get all the districtList where districtName contains DEFAULT_DISTRICT_NAME
-        defaultDistrictShouldBeFound("districtName.contains=" + DEFAULT_DISTRICT_NAME);
-
-        // Get all the districtList where districtName contains UPDATED_DISTRICT_NAME
-        defaultDistrictShouldNotBeFound("districtName.contains=" + UPDATED_DISTRICT_NAME);
-    }
-
-    @Test
-    @Transactional
-    public void getAllDistrictsByDistrictNameNotContainsSomething() throws Exception {
-        // Initialize the database
-        districtRepository.saveAndFlush(district);
-
-        // Get all the districtList where districtName does not contain DEFAULT_DISTRICT_NAME
-        defaultDistrictShouldNotBeFound("districtName.doesNotContain=" + DEFAULT_DISTRICT_NAME);
-
-        // Get all the districtList where districtName does not contain UPDATED_DISTRICT_NAME
-        defaultDistrictShouldBeFound("districtName.doesNotContain=" + UPDATED_DISTRICT_NAME);
-    }
-
-
-    @Test
-    @Transactional
-    public void getAllDistrictsByDivisionIsEqualToSomething() throws Exception {
-        // Get already existing entity
-        Division division = district.getDivision();
-        districtRepository.saveAndFlush(district);
-        Long divisionId = division.getId();
-
-        // Get all the districtList where division equals to divisionId
-        defaultDistrictShouldBeFound("divisionId.equals=" + divisionId);
-
-        // Get all the districtList where division equals to divisionId + 1
-        defaultDistrictShouldNotBeFound("divisionId.equals=" + (divisionId + 1));
-    }
-
-    /**
-     * Executes the search, and checks that the default entity is returned.
-     */
-    private void defaultDistrictShouldBeFound(String filter) throws Exception {
-        restDistrictMockMvc.perform(get("/api/districts?sort=id,desc&" + filter))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(district.getId().intValue())))
-            .andExpect(jsonPath("$.[*].districtName").value(hasItem(DEFAULT_DISTRICT_NAME)));
-
-        // Check, that the count call also returns 1
-        restDistrictMockMvc.perform(get("/api/districts/count?sort=id,desc&" + filter))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(content().string("1"));
-    }
-
-    /**
-     * Executes the search, and checks that the default entity is not returned.
-     */
-    private void defaultDistrictShouldNotBeFound(String filter) throws Exception {
-        restDistrictMockMvc.perform(get("/api/districts?sort=id,desc&" + filter))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$").isArray())
-            .andExpect(jsonPath("$").isEmpty());
-
-        // Check, that the count call also returns 0
-        restDistrictMockMvc.perform(get("/api/districts/count?sort=id,desc&" + filter))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(content().string("0"));
-    }
-
     @Test
     @Transactional
     public void getNonExistingDistrict() throws Exception {

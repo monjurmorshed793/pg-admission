@@ -3,8 +3,6 @@ package aust.edu.web.rest;
 import aust.edu.domain.ApplicantEducationalInformation;
 import aust.edu.service.ApplicantEducationalInformationService;
 import aust.edu.web.rest.errors.BadRequestAlertException;
-import aust.edu.service.dto.ApplicantEducationalInformationCriteria;
-import aust.edu.service.ApplicantEducationalInformationQueryService;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
@@ -42,11 +40,8 @@ public class ApplicantEducationalInformationResource {
 
     private final ApplicantEducationalInformationService applicantEducationalInformationService;
 
-    private final ApplicantEducationalInformationQueryService applicantEducationalInformationQueryService;
-
-    public ApplicantEducationalInformationResource(ApplicantEducationalInformationService applicantEducationalInformationService, ApplicantEducationalInformationQueryService applicantEducationalInformationQueryService) {
+    public ApplicantEducationalInformationResource(ApplicantEducationalInformationService applicantEducationalInformationService) {
         this.applicantEducationalInformationService = applicantEducationalInformationService;
-        this.applicantEducationalInformationQueryService = applicantEducationalInformationQueryService;
     }
 
     /**
@@ -93,27 +88,14 @@ public class ApplicantEducationalInformationResource {
      * {@code GET  /applicant-educational-informations} : get all the applicantEducationalInformations.
      *
      * @param pageable the pagination information.
-     * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of applicantEducationalInformations in body.
      */
     @GetMapping("/applicant-educational-informations")
-    public ResponseEntity<List<ApplicantEducationalInformation>> getAllApplicantEducationalInformations(ApplicantEducationalInformationCriteria criteria, Pageable pageable) {
-        log.debug("REST request to get ApplicantEducationalInformations by criteria: {}", criteria);
-        Page<ApplicantEducationalInformation> page = applicantEducationalInformationQueryService.findByCriteria(criteria, pageable);
+    public ResponseEntity<List<ApplicantEducationalInformation>> getAllApplicantEducationalInformations(Pageable pageable) {
+        log.debug("REST request to get a page of ApplicantEducationalInformations");
+        Page<ApplicantEducationalInformation> page = applicantEducationalInformationService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
-    }
-
-    /**
-     * {@code GET  /applicant-educational-informations/count} : count all the applicantEducationalInformations.
-     *
-     * @param criteria the criteria which the requested entities should match.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
-     */
-    @GetMapping("/applicant-educational-informations/count")
-    public ResponseEntity<Long> countApplicantEducationalInformations(ApplicantEducationalInformationCriteria criteria) {
-        log.debug("REST request to count ApplicantEducationalInformations by criteria: {}", criteria);
-        return ResponseEntity.ok().body(applicantEducationalInformationQueryService.countByCriteria(criteria));
     }
 
     /**
