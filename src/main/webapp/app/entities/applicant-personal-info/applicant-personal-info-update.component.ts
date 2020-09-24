@@ -52,7 +52,7 @@ export class ApplicantPersonalInfoUpdateComponent implements OnInit {
       this.updateForm(applicantPersonalInfo);
 
       this.applicantService
-        .query({ filter: 'applicantpersonalinformation-is-null' })
+        .query({ 'applicantPersonalInformationId.specified': 'false' })
         .pipe(
           map((res: HttpResponse<IApplicant[]>) => {
             return res.body || [];

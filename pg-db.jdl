@@ -128,9 +128,13 @@ relationship ManyToOne{
  ApplicationDeadline{program(programNameShort) required} to Program,
  ApplicantEducationalInformation{examType(examTypeName) required} to ExamType,
  District{division(divisionName) required} to Division,
- Thana{district(districtName) required} to District
+ Thana{district(districtName) required} to District,
+ ApplicantAddress{district(districtName)} to District,
+ ApplicantAddress{division(divisionName)} to Division,
+ ApplicantAddress{thana(thanaName)} to Thana
 }
 
 paginate Semester, Division, District, Thana, Program, ApplicationDeadline, ExamType with infinite-scroll
 paginate Applicant, ApplicantPersonalInfo, ApplicantAddress, ApplicantEducationalInformation, JobExperience with pagination
 service * with serviceClass
+filter *

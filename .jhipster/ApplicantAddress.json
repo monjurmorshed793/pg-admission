@@ -38,6 +38,27 @@
     "relationships": [
         {
             "relationshipType": "many-to-one",
+            "otherEntityName": "district",
+            "otherEntityRelationshipName": "applicantAddress",
+            "relationshipName": "district",
+            "otherEntityField": "districtName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "division",
+            "otherEntityRelationshipName": "applicantAddress",
+            "relationshipName": "division",
+            "otherEntityField": "divisionName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "thana",
+            "otherEntityRelationshipName": "applicantAddress",
+            "relationshipName": "thana",
+            "otherEntityField": "thanaName"
+        },
+        {
+            "relationshipType": "many-to-one",
             "otherEntityName": "applicant",
             "otherEntityRelationshipName": "applicantAddress",
             "relationshipName": "applicant",
@@ -49,7 +70,7 @@
     "dto": "no",
     "pagination": "pagination",
     "service": "serviceClass",
-    "jpaMetamodelFiltering": false,
+    "jpaMetamodelFiltering": true,
     "fluentMethods": true,
     "readOnly": false,
     "embedded": false,

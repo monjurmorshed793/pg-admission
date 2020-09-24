@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface ExamTypeRepository extends JpaRepository<ExamType, Long> {
+public interface ExamTypeRepository extends JpaRepository<ExamType, Long>, JpaSpecificationExecutor<ExamType> {
 }

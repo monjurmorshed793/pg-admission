@@ -48,6 +48,18 @@ public class ApplicantAddress extends AbstractAuditingEntity implements Serializ
 
     @ManyToOne
     @JsonIgnoreProperties(value = "applicantAddresses", allowSetters = true)
+    private District district;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = "applicantAddresses", allowSetters = true)
+    private Division division;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = "applicantAddresses", allowSetters = true)
+    private Thana thana;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = "applicantAddresses", allowSetters = true)
     private Applicant applicant;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -122,6 +134,45 @@ public class ApplicantAddress extends AbstractAuditingEntity implements Serializ
 
     public void setLine2(String line2) {
         this.line2 = line2;
+    }
+
+    public District getDistrict() {
+        return district;
+    }
+
+    public ApplicantAddress district(District district) {
+        this.district = district;
+        return this;
+    }
+
+    public void setDistrict(District district) {
+        this.district = district;
+    }
+
+    public Division getDivision() {
+        return division;
+    }
+
+    public ApplicantAddress division(Division division) {
+        this.division = division;
+        return this;
+    }
+
+    public void setDivision(Division division) {
+        this.division = division;
+    }
+
+    public Thana getThana() {
+        return thana;
+    }
+
+    public ApplicantAddress thana(Thana thana) {
+        this.thana = thana;
+        return this;
+    }
+
+    public void setThana(Thana thana) {
+        this.thana = thana;
     }
 
     public Applicant getApplicant() {

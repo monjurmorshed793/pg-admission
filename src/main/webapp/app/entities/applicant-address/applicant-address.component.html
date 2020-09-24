@@ -28,6 +28,9 @@
                     <th scope="col"  jhiSortBy="thanaOther"><span>Thana Other</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="line1"><span>Line 1</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="line2"><span>Line 2</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="district.districtName"><span>District</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="division.divisionName"><span>Division</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="thana.thanaName"><span>Thana</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="applicant.applicationSerial"><span>Applicant</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
@@ -40,6 +43,21 @@
                     <td>{{ applicantAddress.thanaOther }}</td>
                     <td>{{ applicantAddress.line1 }}</td>
                     <td>{{ applicantAddress.line2 }}</td>
+                    <td>
+                        <div *ngIf="applicantAddress.district">
+                            <a [routerLink]="['/district', applicantAddress.district?.id, 'view']" >{{ applicantAddress.district?.districtName }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="applicantAddress.division">
+                            <a [routerLink]="['/division', applicantAddress.division?.id, 'view']" >{{ applicantAddress.division?.divisionName }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="applicantAddress.thana">
+                            <a [routerLink]="['/thana', applicantAddress.thana?.id, 'view']" >{{ applicantAddress.thana?.thanaName }}</a>
+                        </div>
+                    </td>
                     <td>
                         <div *ngIf="applicantAddress.applicant">
                             <a [routerLink]="['/applicant', applicantAddress.applicant?.id, 'view']" >{{ applicantAddress.applicant?.applicationSerial }}</a>

@@ -55,6 +55,12 @@ public class ApplicantAddressCriteria implements Serializable, Criteria {
 
     private StringFilter line2;
 
+    private LongFilter districtId;
+
+    private LongFilter divisionId;
+
+    private LongFilter thanaId;
+
     private LongFilter applicantId;
 
     public ApplicantAddressCriteria() {
@@ -67,6 +73,9 @@ public class ApplicantAddressCriteria implements Serializable, Criteria {
         this.thanaOther = other.thanaOther == null ? null : other.thanaOther.copy();
         this.line1 = other.line1 == null ? null : other.line1.copy();
         this.line2 = other.line2 == null ? null : other.line2.copy();
+        this.districtId = other.districtId == null ? null : other.districtId.copy();
+        this.divisionId = other.divisionId == null ? null : other.divisionId.copy();
+        this.thanaId = other.thanaId == null ? null : other.thanaId.copy();
         this.applicantId = other.applicantId == null ? null : other.applicantId.copy();
     }
 
@@ -123,6 +132,30 @@ public class ApplicantAddressCriteria implements Serializable, Criteria {
         this.line2 = line2;
     }
 
+    public LongFilter getDistrictId() {
+        return districtId;
+    }
+
+    public void setDistrictId(LongFilter districtId) {
+        this.districtId = districtId;
+    }
+
+    public LongFilter getDivisionId() {
+        return divisionId;
+    }
+
+    public void setDivisionId(LongFilter divisionId) {
+        this.divisionId = divisionId;
+    }
+
+    public LongFilter getThanaId() {
+        return thanaId;
+    }
+
+    public void setThanaId(LongFilter thanaId) {
+        this.thanaId = thanaId;
+    }
+
     public LongFilter getApplicantId() {
         return applicantId;
     }
@@ -148,6 +181,9 @@ public class ApplicantAddressCriteria implements Serializable, Criteria {
             Objects.equals(thanaOther, that.thanaOther) &&
             Objects.equals(line1, that.line1) &&
             Objects.equals(line2, that.line2) &&
+            Objects.equals(districtId, that.districtId) &&
+            Objects.equals(divisionId, that.divisionId) &&
+            Objects.equals(thanaId, that.thanaId) &&
             Objects.equals(applicantId, that.applicantId);
     }
 
@@ -160,6 +196,9 @@ public class ApplicantAddressCriteria implements Serializable, Criteria {
         thanaOther,
         line1,
         line2,
+        districtId,
+        divisionId,
+        thanaId,
         applicantId
         );
     }
@@ -174,6 +213,9 @@ public class ApplicantAddressCriteria implements Serializable, Criteria {
                 (thanaOther != null ? "thanaOther=" + thanaOther + ", " : "") +
                 (line1 != null ? "line1=" + line1 + ", " : "") +
                 (line2 != null ? "line2=" + line2 + ", " : "") +
+                (districtId != null ? "districtId=" + districtId + ", " : "") +
+                (divisionId != null ? "divisionId=" + divisionId + ", " : "") +
+                (thanaId != null ? "thanaId=" + thanaId + ", " : "") +
                 (applicantId != null ? "applicantId=" + applicantId + ", " : "") +
             "}";
     }

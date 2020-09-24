@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface ApplicationDeadlineRepository extends JpaRepository<ApplicationDeadline, Long> {
+public interface ApplicationDeadlineRepository extends JpaRepository<ApplicationDeadline, Long>, JpaSpecificationExecutor<ApplicationDeadline> {
 }

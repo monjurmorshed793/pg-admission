@@ -66,6 +66,30 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="form-control-label" for="field_district">District</label>
+                    <select class="form-control" id="field_district" name="district" formControlName="district">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="districtOption.id === editForm.get('district')!.value?.id ? editForm.get('district')!.value : districtOption" *ngFor="let districtOption of districts; trackBy: trackById">{{ districtOption.districtName }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_division">Division</label>
+                    <select class="form-control" id="field_division" name="division" formControlName="division">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="divisionOption.id === editForm.get('division')!.value?.id ? editForm.get('division')!.value : divisionOption" *ngFor="let divisionOption of divisions; trackBy: trackById">{{ divisionOption.divisionName }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_thana">Thana</label>
+                    <select class="form-control" id="field_thana" name="thana" formControlName="thana">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="thanaOption.id === editForm.get('thana')!.value?.id ? editForm.get('thana')!.value : thanaOption" *ngFor="let thanaOption of thanas; trackBy: trackById">{{ thanaOption.thanaName }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
                     <label class="form-control-label" for="field_applicant">Applicant</label>
                     <select class="form-control" id="field_applicant" name="applicant" formControlName="applicant">
                         <option [ngValue]="null"></option>

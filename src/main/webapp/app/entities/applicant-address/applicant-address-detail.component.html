@@ -28,6 +28,24 @@
                 <dd>
                     <span>{{ applicantAddress.line2 }}</span>
                 </dd>
+                <dt><span>District</span></dt>
+                <dd>
+                    <div *ngIf="applicantAddress.district">
+                        <a [routerLink]="['/district', applicantAddress.district?.id, 'view']">{{ applicantAddress.district?.districtName }}</a>
+                    </div>
+                </dd>
+                <dt><span>Division</span></dt>
+                <dd>
+                    <div *ngIf="applicantAddress.division">
+                        <a [routerLink]="['/division', applicantAddress.division?.id, 'view']">{{ applicantAddress.division?.divisionName }}</a>
+                    </div>
+                </dd>
+                <dt><span>Thana</span></dt>
+                <dd>
+                    <div *ngIf="applicantAddress.thana">
+                        <a [routerLink]="['/thana', applicantAddress.thana?.id, 'view']">{{ applicantAddress.thana?.thanaName }}</a>
+                    </div>
+                </dd>
                 <dt><span>Applicant</span></dt>
                 <dd>
                     <div *ngIf="applicantAddress.applicant">
