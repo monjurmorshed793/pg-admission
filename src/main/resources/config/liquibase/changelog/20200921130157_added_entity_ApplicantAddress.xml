@@ -30,6 +30,15 @@
             <column name="line_2" type="varchar(100)">
                 <constraints nullable="true" />
             </column>
+            <column name="district_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="division_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="thana_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
             <column name="applicant_id" type="bigint">
                 <constraints nullable="true" />
             </column>

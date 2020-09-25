@@ -3,6 +3,8 @@ package aust.edu.web.rest;
 import aust.edu.domain.ApplicationDeadline;
 import aust.edu.service.ApplicationDeadlineService;
 import aust.edu.web.rest.errors.BadRequestAlertException;
+import aust.edu.service.dto.ApplicationDeadlineCriteria;
+import aust.edu.service.ApplicationDeadlineQueryService;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
@@ -40,8 +42,11 @@ public class ApplicationDeadlineResource {
 
     private final ApplicationDeadlineService applicationDeadlineService;
 
-    public ApplicationDeadlineResource(ApplicationDeadlineService applicationDeadlineService) {
+    private final ApplicationDeadlineQueryService applicationDeadlineQueryService;
+
+    public ApplicationDeadlineResource(ApplicationDeadlineService applicationDeadlineService, ApplicationDeadlineQueryService applicationDeadlineQueryService) {
         this.applicationDeadlineService = applicationDeadlineService;
+        this.applicationDeadlineQueryService = applicationDeadlineQueryService;
     }
 
     /**
@@ -88,14 +93,27 @@ public class ApplicationDeadlineResource {
      * {@code GET  /application-deadlines} : get all the applicationDeadlines.
      *
      * @param pageable the pagination information.
+     * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of applicationDeadlines in body.
      */
     @GetMapping("/application-deadlines")
-    public ResponseEntity<List<ApplicationDeadline>> getAllApplicationDeadlines(Pageable pageable) {
-        log.debug("REST request to get a page of ApplicationDeadlines");
-        Page<ApplicationDeadline> page = applicationDeadlineService.findAll(pageable);
+    public ResponseEntity<List<ApplicationDeadline>> getAllApplicationDeadlines(ApplicationDeadlineCriteria criteria, Pageable pageable) {
+        log.debug("REST request to get ApplicationDeadlines by criteria: {}", criteria);
+        Page<ApplicationDeadline> page = applicationDeadlineQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+     * {@code GET  /application-deadlines/count} : count all the applicationDeadlines.
+     *
+     * @param criteria the criteria which the requested entities should match.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+     */
+    @GetMapping("/application-deadlines/count")
+    public ResponseEntity<Long> countApplicationDeadlines(ApplicationDeadlineCriteria criteria) {
+        log.debug("REST request to count ApplicationDeadlines by criteria: {}", criteria);
+        return ResponseEntity.ok().body(applicationDeadlineQueryService.countByCriteria(criteria));
     }
 
     /**
