@@ -1,6 +1,7 @@
 package aust.edu.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -57,6 +58,16 @@ public class Applicant extends AbstractAuditingEntity implements Serializable {
     @OneToMany(mappedBy = "applicant")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<ApplicantAddress> applicantAddresses = new HashSet<>();
+
+    @ManyToOne(optional = false)
+    @NotNull
+    @JsonIgnoreProperties(value = "applicants", allowSetters = true)
+    private Semester semester;
+
+    @ManyToOne(optional = false)
+    @NotNull
+    @JsonIgnoreProperties(value = "applicants", allowSetters = true)
+    private Program program;
 
     @OneToOne(mappedBy = "applicant")
     @JsonIgnore
@@ -209,6 +220,32 @@ public class Applicant extends AbstractAuditingEntity implements Serializable {
 
     public void setApplicantAddresses(Set<ApplicantAddress> applicantAddresses) {
         this.applicantAddresses = applicantAddresses;
+    }
+
+    public Semester getSemester() {
+        return semester;
+    }
+
+    public Applicant semester(Semester semester) {
+        this.semester = semester;
+        return this;
+    }
+
+    public void setSemester(Semester semester) {
+        this.semester = semester;
+    }
+
+    public Program getProgram() {
+        return program;
+    }
+
+    public Applicant program(Program program) {
+        this.program = program;
+        return this;
+    }
+
+    public void setProgram(Program program) {
+        this.program = program;
     }
 
     public ApplicantPersonalInfo getApplicantPersonalInformation() {

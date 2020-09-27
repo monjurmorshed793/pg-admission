@@ -62,6 +62,10 @@ public class ApplicantCriteria implements Serializable, Criteria {
 
     private LongFilter applicantAddressId;
 
+    private LongFilter semesterId;
+
+    private LongFilter programId;
+
     private LongFilter applicantPersonalInformationId;
 
     public ApplicantCriteria() {
@@ -77,6 +81,8 @@ public class ApplicantCriteria implements Serializable, Criteria {
         this.applicantEducationalInformationId = other.applicantEducationalInformationId == null ? null : other.applicantEducationalInformationId.copy();
         this.jobExperienceId = other.jobExperienceId == null ? null : other.jobExperienceId.copy();
         this.applicantAddressId = other.applicantAddressId == null ? null : other.applicantAddressId.copy();
+        this.semesterId = other.semesterId == null ? null : other.semesterId.copy();
+        this.programId = other.programId == null ? null : other.programId.copy();
         this.applicantPersonalInformationId = other.applicantPersonalInformationId == null ? null : other.applicantPersonalInformationId.copy();
     }
 
@@ -157,6 +163,22 @@ public class ApplicantCriteria implements Serializable, Criteria {
         this.applicantAddressId = applicantAddressId;
     }
 
+    public LongFilter getSemesterId() {
+        return semesterId;
+    }
+
+    public void setSemesterId(LongFilter semesterId) {
+        this.semesterId = semesterId;
+    }
+
+    public LongFilter getProgramId() {
+        return programId;
+    }
+
+    public void setProgramId(LongFilter programId) {
+        this.programId = programId;
+    }
+
     public LongFilter getApplicantPersonalInformationId() {
         return applicantPersonalInformationId;
     }
@@ -185,6 +207,8 @@ public class ApplicantCriteria implements Serializable, Criteria {
             Objects.equals(applicantEducationalInformationId, that.applicantEducationalInformationId) &&
             Objects.equals(jobExperienceId, that.jobExperienceId) &&
             Objects.equals(applicantAddressId, that.applicantAddressId) &&
+            Objects.equals(semesterId, that.semesterId) &&
+            Objects.equals(programId, that.programId) &&
             Objects.equals(applicantPersonalInformationId, that.applicantPersonalInformationId);
     }
 
@@ -200,6 +224,8 @@ public class ApplicantCriteria implements Serializable, Criteria {
         applicantEducationalInformationId,
         jobExperienceId,
         applicantAddressId,
+        semesterId,
+        programId,
         applicantPersonalInformationId
         );
     }
@@ -217,6 +243,8 @@ public class ApplicantCriteria implements Serializable, Criteria {
                 (applicantEducationalInformationId != null ? "applicantEducationalInformationId=" + applicantEducationalInformationId + ", " : "") +
                 (jobExperienceId != null ? "jobExperienceId=" + jobExperienceId + ", " : "") +
                 (applicantAddressId != null ? "applicantAddressId=" + applicantAddressId + ", " : "") +
+                (semesterId != null ? "semesterId=" + semesterId + ", " : "") +
+                (programId != null ? "programId=" + programId + ", " : "") +
                 (applicantPersonalInformationId != null ? "applicantPersonalInformationId=" + applicantPersonalInformationId + ", " : "") +
             "}";
     }

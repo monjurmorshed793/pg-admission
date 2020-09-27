@@ -28,6 +28,8 @@
                     <th scope="col"  jhiSortBy="appliedOn"><span>Applied On</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="applicationFeePaidOn"><span>Application Fee Paid On</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="selectedRejectedOn"><span>Selected Rejected On</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="semester.semesterName"><span>Semester</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="program.programNameShort"><span>Program</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -39,6 +41,16 @@
                     <td>{{ applicant.appliedOn | date:'medium' }}</td>
                     <td>{{ applicant.applicationFeePaidOn | date:'medium' }}</td>
                     <td>{{ applicant.selectedRejectedOn | date:'medium' }}</td>
+                    <td>
+                        <div *ngIf="applicant.semester">
+                            <a [routerLink]="['/semester', applicant.semester?.id, 'view']" >{{ applicant.semester?.semesterName }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="applicant.program">
+                            <a [routerLink]="['/program', applicant.program?.id, 'view']" >{{ applicant.program?.programNameShort }}</a>
+                        </div>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

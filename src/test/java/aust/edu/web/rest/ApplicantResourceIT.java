@@ -5,6 +5,8 @@ import aust.edu.domain.Applicant;
 import aust.edu.domain.ApplicantEducationalInformation;
 import aust.edu.domain.JobExperience;
 import aust.edu.domain.ApplicantAddress;
+import aust.edu.domain.Semester;
+import aust.edu.domain.Program;
 import aust.edu.domain.ApplicantPersonalInfo;
 import aust.edu.repository.ApplicantRepository;
 import aust.edu.service.ApplicantService;
@@ -85,6 +87,26 @@ public class ApplicantResourceIT {
             .appliedOn(DEFAULT_APPLIED_ON)
             .applicationFeePaidOn(DEFAULT_APPLICATION_FEE_PAID_ON)
             .selectedRejectedOn(DEFAULT_SELECTED_REJECTED_ON);
+        // Add required entity
+        Semester semester;
+        if (TestUtil.findAll(em, Semester.class).isEmpty()) {
+            semester = SemesterResourceIT.createEntity(em);
+            em.persist(semester);
+            em.flush();
+        } else {
+            semester = TestUtil.findAll(em, Semester.class).get(0);
+        }
+        applicant.setSemester(semester);
+        // Add required entity
+        Program program;
+        if (TestUtil.findAll(em, Program.class).isEmpty()) {
+            program = ProgramResourceIT.createEntity(em);
+            em.persist(program);
+            em.flush();
+        } else {
+            program = TestUtil.findAll(em, Program.class).get(0);
+        }
+        applicant.setProgram(program);
         return applicant;
     }
     /**
@@ -100,6 +122,26 @@ public class ApplicantResourceIT {
             .appliedOn(UPDATED_APPLIED_ON)
             .applicationFeePaidOn(UPDATED_APPLICATION_FEE_PAID_ON)
             .selectedRejectedOn(UPDATED_SELECTED_REJECTED_ON);
+        // Add required entity
+        Semester semester;
+        if (TestUtil.findAll(em, Semester.class).isEmpty()) {
+            semester = SemesterResourceIT.createUpdatedEntity(em);
+            em.persist(semester);
+            em.flush();
+        } else {
+            semester = TestUtil.findAll(em, Semester.class).get(0);
+        }
+        applicant.setSemester(semester);
+        // Add required entity
+        Program program;
+        if (TestUtil.findAll(em, Program.class).isEmpty()) {
+            program = ProgramResourceIT.createUpdatedEntity(em);
+            em.persist(program);
+            em.flush();
+        } else {
+            program = TestUtil.findAll(em, Program.class).get(0);
+        }
+        applicant.setProgram(program);
         return applicant;
     }
 
@@ -594,6 +636,38 @@ public class ApplicantResourceIT {
 
         // Get all the applicantList where applicantAddress equals to applicantAddressId + 1
         defaultApplicantShouldNotBeFound("applicantAddressId.equals=" + (applicantAddressId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllApplicantsBySemesterIsEqualToSomething() throws Exception {
+        // Get already existing entity
+        Semester semester = applicant.getSemester();
+        applicantRepository.saveAndFlush(applicant);
+        Long semesterId = semester.getId();
+
+        // Get all the applicantList where semester equals to semesterId
+        defaultApplicantShouldBeFound("semesterId.equals=" + semesterId);
+
+        // Get all the applicantList where semester equals to semesterId + 1
+        defaultApplicantShouldNotBeFound("semesterId.equals=" + (semesterId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllApplicantsByProgramIsEqualToSomething() throws Exception {
+        // Get already existing entity
+        Program program = applicant.getProgram();
+        applicantRepository.saveAndFlush(applicant);
+        Long programId = program.getId();
+
+        // Get all the applicantList where program equals to programId
+        defaultApplicantShouldBeFound("programId.equals=" + programId);
+
+        // Get all the applicantList where program equals to programId + 1
+        defaultApplicantShouldNotBeFound("programId.equals=" + (programId + 1));
     }
 
 
