@@ -46,6 +46,22 @@
             "relationshipName": "applicantAddress"
         },
         {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "semester",
+            "otherEntityRelationshipName": "applicant",
+            "relationshipValidateRules": "required",
+            "relationshipName": "semester",
+            "otherEntityField": "semesterName"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "program",
+            "otherEntityRelationshipName": "applicant",
+            "relationshipValidateRules": "required",
+            "relationshipName": "program",
+            "otherEntityField": "programNameShort"
+        },
+        {
             "relationshipType": "one-to-one",
             "otherEntityName": "applicantPersonalInfo",
             "otherEntityRelationshipName": "applicant",

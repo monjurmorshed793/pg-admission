@@ -31,6 +31,7 @@
   },
   "defaultProject": "pgadmission",
   "cli": {
-    "packageManager": "npm"
+    "packageManager": "npm",
+    "analytics": "484bc1b7-e665-4a88-8bdf-f049add3937b"
   }
 }

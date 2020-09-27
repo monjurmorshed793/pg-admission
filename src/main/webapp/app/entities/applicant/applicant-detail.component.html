@@ -28,6 +28,18 @@
                 <dd>
                     <span>{{ applicant.selectedRejectedOn }}</span>
                 </dd>
+                <dt><span>Semester</span></dt>
+                <dd>
+                    <div *ngIf="applicant.semester">
+                        <a [routerLink]="['/semester', applicant.semester?.id, 'view']">{{ applicant.semester?.semesterName }}</a>
+                    </div>
+                </dd>
+                <dt><span>Program</span></dt>
+                <dd>
+                    <div *ngIf="applicant.program">
+                        <a [routerLink]="['/program', applicant.program?.id, 'view']">{{ applicant.program?.programNameShort }}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"

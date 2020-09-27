@@ -126,6 +126,8 @@ relationship OneToMany{
 relationship ManyToOne{
  ApplicationDeadline{semester(semesterName) required} to Semester,
  ApplicationDeadline{program(programNameShort) required} to Program,
+ Applicant{semester(semesterName) required} to Semester,
+ Applicant{program(programNameShort) required} to Program,
  ApplicantEducationalInformation{examType(examTypeName) required} to ExamType,
  District{division(divisionName) required} to Division,
  Thana{district(districtName) required} to District,

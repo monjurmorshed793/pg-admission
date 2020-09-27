@@ -112,6 +112,14 @@ public class ApplicantQueryService extends QueryService<Applicant> {
                 specification = specification.and(buildSpecification(criteria.getApplicantAddressId(),
                     root -> root.join(Applicant_.applicantAddresses, JoinType.LEFT).get(ApplicantAddress_.id)));
             }
+            if (criteria.getSemesterId() != null) {
+                specification = specification.and(buildSpecification(criteria.getSemesterId(),
+                    root -> root.join(Applicant_.semester, JoinType.LEFT).get(Semester_.id)));
+            }
+            if (criteria.getProgramId() != null) {
+                specification = specification.and(buildSpecification(criteria.getProgramId(),
+                    root -> root.join(Applicant_.program, JoinType.LEFT).get(Program_.id)));
+            }
             if (criteria.getApplicantPersonalInformationId() != null) {
                 specification = specification.and(buildSpecification(criteria.getApplicantPersonalInformationId(),
                     root -> root.join(Applicant_.applicantPersonalInformation, JoinType.LEFT).get(ApplicantPersonalInfo_.id)));
